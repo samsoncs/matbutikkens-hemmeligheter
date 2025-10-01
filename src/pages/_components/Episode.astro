@@ -1,4 +1,8 @@
-<div class="bg-emerald-100/60 rounded-4xl ring-1 ring-emerald-200 py-6 px-8 flex flex-col gap-2 shadow-xl shadow-emerald-800/5">
+---
+import { Image } from 'astro:assets';
+import brobert from '../../assets/brobert.png';
+---
+<div class="relative overflow-hidden bg-emerald-100/80 rounded-4xl ring-1 ring-emerald-200 py-6 px-8 flex flex-col gap-2 shadow-xl shadow-emerald-800/5">
     <h3 class="text-xl font-bold">
         Episode 1 - Brokkolien Brobert
     </h3>
@@ -8,4 +12,13 @@
     <div>
         <button class="bg-emerald-700 font-semibold text-white px-4 py-2 rounded-full">Hør nå</button>
     </div>
+    <div class="-z-1 pointer-events-none select-none absolute right-[-14%] bottom-[-20%] rotate-6 origin-center">
+				
+				<Image
+					class="rounded-lg"
+                    src={brobert}
+					width={350}
+                    alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
+                />
+			</div>
 </div>

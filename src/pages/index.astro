@@ -1,59 +1,124 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Episode from "./_components/Episode.astro";
-import { Image } from 'astro:assets';
-import brobert from '../assets/brobert.png';
-
+import { Image } from "astro:assets";
+import brobert from "../assets/brobert.png";
 ---
-<Layout title="Hjem">
-	<div class="flex flex-col gap-8 md:gap-12">
-	<section class="relative overflow-hidden bg-gradient-to-br from-emerald-100 via-emerald-50/70 to-teal-100/70 rounded-4xl ring-1 ring-emerald-200/60 shadow-xl shadow-emerald-800/5">
-        <div class="px-8 py-16  md:py-24 flex flex-col gap-6 md:gap-12">
-            <div class="w-9/12 xs:w-10/12 sm:w-3/4 md:w-7/12">
-                <h1 class="text-4xl md:text-5xl leading-tight font-extrabold mb-6 text-emerald-950">
-                    Matbutikkens <span class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600">
-						Hemmeligheter</span>
-                </h1>
-                <p class="text-lg font-semibold text-emerald-950/80">
-                    Matbutikkens Hemmeligheter er en spennende og lærerik podkast for barn fra 2-5 år, 
-					med fokus på matglede, vennskap og samarbeid. Med masse humor, fantasi, fengende musikk 
-					og lydefekter.
-                </p>
-				<div class="flex flex-col gap-4 items-start pt-6">
-					<button class="bg-emerald-600 font-semibold text-white px-4 py-2 rounded-full ring-3 ring-emerald-600">Hør nå ▶︎</button>
-					<button class="bg-white font-semibold text-emerald-800 px-4 py-2 rounded-full ring-3 ring-emerald-300">Siste episoder ➜</button>
-				</div>
-            </div>
-			<div class="-z-1 sm:z-1 pointer-events-none select-none absolute lg:right-[-4%] md:right-[-7%] sm:right-[-14%] right-[-34%] bottom-[-20%] sm:bottom-[-24%] md:bottom-[-16%] rotate-6 md:rotate-3 origin-center">
-				<Image
-					class="rounded-lg hidden md:block"
-                    src={brobert}
-					width={650}
-                    alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
-                />
-				<Image
-					class="rounded-lg md:hidden block"
-                    src={brobert}
-					width={550}
-                    alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
-                />
-			</div>
-                
-            <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(16,185,129,0.15),transparent_60%)]"></div>
+
+<BaseLayout title="Hjem">
+  <div
+    class="flex flex-col gap-8 md:gap-12 mx-auto max-w-6xl px-2 md:px-4 pb-8"
+  >
+    <section
+      class="relative overflow-hidden bg-gradient-to-br from-emerald-100 via-emerald-50/70 to-teal-100/70 rounded-4xl ring-1 ring-emerald-200/60 shadow-xl shadow-emerald-800/5"
+    >
+      <div class="px-8 py-16 md:py-24 flex flex-col gap-6 md:gap-12">
+        <div class="w-9/12 xs:w-10/12 sm:w-3/4 md:w-7/12">
+          <h1 class="text-4xl md:text-5xl leading-tight font-extrabold mb-6">
+            <span
+              class="bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-pink-600"
+            >
+              Matbutikkens
+            </span>
+            <span
+              class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600"
+            >
+              Hemmeligheter</span
+            >
+          </h1>
+          <p class="text-lg font-semibold text-emerald-950/80">
+            Matbutikkens Hemmeligheter er en spennende og lærerik podkast for
+            barn fra 2-5 år, med fokus på matglede, vennskap og samarbeid. Med
+            masse humor, fantasi, fengende musikk og lydefekter.
+          </p>
+          <div class="flex flex-col gap-4 items-start pt-6">
+            <button
+              class="z-10 bg-emerald-600 font-semibold text-white px-4 py-2 rounded-full ring-3 ring-emerald-600"
+              >Hør nå ▶︎</button
+            >
+            <button
+              class="z-10 bg-white font-semibold text-emerald-800 px-4 py-2 rounded-full ring-3 ring-emerald-300"
+              >Siste episoder ➜</button
+            >
+          </div>
         </div>
+        <div
+          class="pointer-events-none select-none absolute lg:right-[-4%] md:right-[-7%] sm:right-[-14%] right-[-34%] bottom-[-20%] sm:bottom-[-24%] md:bottom-[-16%] rotate-6 md:rotate-3 origin-center"
+        >
+          <Image
+            class="rounded-lg hidden md:block"
+            src={brobert}
+            width={650}
+            alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
+          />
+          <Image
+            class="rounded-lg md:hidden block"
+            src={brobert}
+            width={550}
+            alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
+          />
+        </div>
+
+        <div
+          class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(16,185,129,0.15),transparent_60%)]"
+        >
+        </div>
+      </div>
     </section>
 
-	<section class="flex flex-col gap-4">
-		<h2 class="text-xl font-bold">Siste episoder</h2>
+    <section class="flex flex-col gap-8">
+      <h2 class="text-xl font-bold">Siste episoder</h2>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-			<Episode />
-			<Episode />
-		</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+        <Episode />
+        <Episode />
+      </div>
 
-		<div class="flex justify-center">
-			<button class="bg-rose-500 font-semibold text-white px-4 py-2 rounded-full">Alle episoder</button>
-		</div>
-	</section>
-	</div>	
-</Layout>
+      <div class="flex justify-center">
+        <a
+          href="/episodes"
+          class="bg-rose-500 font-semibold text-white px-4 py-2 rounded-full"
+          >Alle episoder</a
+        >
+      </div>
+    </section>
+  </div>
+
+  <div class="w-full leading-none -mb-px">
+    <svg
+      class="block w-full h-16 md:h-20"
+      viewBox="0 0 1440 160"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+    >
+      <!-- Top is transparent (shows previous white area),
+           bottom filled with gradient start color (#047857 ~ emerald-700). -->
+      <path
+        d="M0 50 C 240 110 480 0 720 60 C 960 120 1200 40 1440 70 L1440 160 L0 160 Z"
+        fill="#047857"></path>
+    </svg>
+  </div>
+
+  <div class="bg-emerald-700 text-white py-8 px-8">
+    <section class="flex flex-col gap-6 mx-auto max-w-6xl px-2 md:px-4 mb-8">
+      <h2 class="text-xl font-bold">Om podkasten</h2>
+      <p>
+        Matbutikkens Hemmeligheter er en podkast laget for barn i alderen 2-5
+        år, med fokus på matglede, vennskap og samarbeid. Hver episode tar barna
+        med på spennende eventyr i en magisk matbutikk, hvor de møter morsomme
+        karakterer og lærer viktige verdier gjennom fengende historier og
+        sanger. Podkasten er designet for å stimulere barnas fantasi og
+        nysgjerrighet, samtidig som den fremmer positive holdninger til mat og
+        samspill med andre.
+      </p>
+      <p>
+        Gjennom humor, fantasi og engasjerende lydeffekter, ønsker Matbutikkens
+        Hemmeligheter å skape en underholdende og lærerik opplevelse for de
+        yngste lytterne. Podkasten er utviklet i samarbeid med pedagoger og
+        foreldre for å sikre at innholdet er både underholdende og utviklende
+        for barn i denne aldersgruppen. Målet er å inspirere barn til å utforske
+        verden rundt dem, utvikle sunne matvaner og bygge sterke vennskap.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

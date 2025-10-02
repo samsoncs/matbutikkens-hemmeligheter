@@ -36,9 +36,10 @@ import brobert from "../assets/brobert.png";
               class="z-10 bg-emerald-600 font-semibold text-white px-4 py-2 rounded-full ring-3 ring-emerald-600"
               >Hør nå ▶︎</button
             >
-            <button
+            <a
+              href={`${import.meta.env.BASE_URL}episodes`}
               class="z-10 bg-white font-semibold text-emerald-800 px-4 py-2 rounded-full ring-3 ring-emerald-300"
-              >Siste episoder ➜</button
+              >Siste episoder ➜</a
             >
           </div>
         </div>
@@ -76,7 +77,7 @@ import brobert from "../assets/brobert.png";
 
       <div class="flex justify-center">
         <a
-          href="episodes"
+          href={`${import.meta.env.BASE_URL}episodes/`}
           class="bg-rose-500 font-semibold text-white px-4 py-2 rounded-full"
           >Alle episoder</a
         >

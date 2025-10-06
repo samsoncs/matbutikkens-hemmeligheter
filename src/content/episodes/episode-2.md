@@ -1,5 +1,5 @@
 ---
-name: "Hvorfor lukter butikkbrødet så godt?"
+name: "Purren Purnille"
 published: "2025-10-18"
 length: "11:51"
 cover: "../../assets/ep2.png"

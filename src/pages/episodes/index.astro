@@ -1,30 +1,25 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Episode from "../_components/Episode.astro";
+import { getCollection } from "astro:content";
+const episodes = (await getCollection("episodes")).slice(0, 2);
 ---
 
 <Layout title="Episoder">
   <div>
     <h1 class="text-4xl font-extrabold mb-6">Episoder</h1>
-    <div class="grid grid-cols-2 gap-4">
-      <div class="col-span-2 md:col-span-1">
-        <Episode />
-      </div>
-      <div class="col-span-2 md:col-span-1">
-        <Episode />
-      </div>
-      <div class="col-span-2 md:col-span-1">
-        <Episode />
-      </div>
-      <div class="col-span-2 md:col-span-1">
-        <Episode />
-      </div>
-      <div class="col-span-2 md:col-span-1">
-        <Episode />
-      </div>
-      <div class="col-span-2 md:col-span-1">
-        <Episode />
-      </div>
+    <div class="flex flex-col gap-8">
+      {
+        episodes.map(({ id, data }) => (
+          <Episode
+            name={data.name}
+            published={data.published}
+            length={data.length}
+            image={data.cover}
+            description={data.description}
+          />
+        ))
+      }
     </div>
   </div>
 </Layout>

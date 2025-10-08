@@ -13,7 +13,7 @@ const { name, published, length, image, description } = Astro.props;
 ---
 
 <div
-  class="overflow-hidden bg-emerald-100/80 rounded-4xl ring-1 ring-emerald-200 shadow-xl shadow-emerald-800/5
+  class="overflow-hidden bg-emerald-100/80 rounded-4xl shadow-xl shadow-emerald-800/5
             flex flex-col sm:grid sm:grid-cols-12"
 >
   <div
@@ -34,8 +34,10 @@ const { name, published, length, image, description } = Astro.props;
     <h3 class="text-xl font-bold mb-2 text-emerald-800">
       {name}
     </h3>
-    <div class="font-bold text-emerald-800 mb-1">
-      Varighet: {length} | Utgitt: {published}
+    <div class="text-emerald-800 mb-1">
+      <span class="font-bold">Varighet:</span>
+      {length} • <span class="font-bold">Utgitt:</span>
+      {published}
     </div>
     <p class="text-base leading-5 mb-4">
       {description}

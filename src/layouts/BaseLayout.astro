@@ -8,9 +8,10 @@ interface Props {
   bgFrom: string;
   bgTo: string;
   accent: string;
+  noMaxWidth?: boolean;
 }
 
-const { title, bgFrom, bgTo, accent } = Astro.props;
+const { title, bgFrom, bgTo, accent, noMaxWidth = false } = Astro.props;
 
 // We always use the same utility classes; custom colors flow through CSS vars.
 const bodyGradientClasses =
@@ -57,7 +58,7 @@ const bodyGradientClasses =
         </div>
       </div>
     </nav>
-    <article class="mx-auto max-w-6xl min-h-screen">
+    <article class={`min-h-screen ${noMaxWidth ? "" : "mx-auto max-w-6xl "}`}>
       <slot />
     </article>
     <script is:inline>

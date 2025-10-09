@@ -10,6 +10,9 @@ const episodes = defineCollection({
       length: z.string(),
       cover: image(),
       description: z.string(),
+      fromColor: z.string(),
+      toColor: z.string(),
+      accentColor: z.string(),
     }),
 });
 

@@ -7,10 +7,13 @@ import { getCollection } from "astro:content";
 const episodes = (await getCollection("episodes")).slice(0, 2);
 ---
 
-<BaseLayout title="Hjem">
-  <div
-    class="flex flex-col gap-8 md:gap-12 mx-auto max-w-6xl px-2 md:px-4 pb-8"
-  >
+<BaseLayout
+  bgFrom="oklch(98.6% 0.031 120.757)"
+  bgTo="oklch(96.9% 0.015 12.422)"
+  accent="oklch(59.6% 0.145 163.225)"
+  title="Hjem"
+>
+  <div class="flex flex-col gap-8 md:gap-12 px-2 md:px-4 pb-8">
     <section
       class="relative overflow-hidden bg-gradient-to-br from-emerald-100 via-emerald-50/70 to-teal-100/70 rounded-4xl shadow-xl shadow-emerald-800/5"
     >
@@ -81,6 +84,7 @@ const episodes = (await getCollection("episodes")).slice(0, 2);
               length={data.length}
               image={data.cover}
               description={data.description}
+              id={id}
             />
           ))
         }

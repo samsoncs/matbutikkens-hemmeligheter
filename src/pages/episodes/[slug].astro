@@ -1,0 +1,218 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const episodes = await getCollection("episodes");
+
+  return episodes.map((e) => ({
+    params: { slug: e.id },
+    props: { episode: e },
+  }));
+}
+
+const { slug } = Astro.params;
+if (!slug) throw new Error("Missing slug param");
+
+const episode = Astro.props.episode;
+if (!episode) {
+  throw new Error(`Missing episode prop for slug "${slug}"`);
+}
+
+const { data } = episode;
+---
+
+<BaseLayout
+  bgFrom={data.fromColor}
+  bgTo={data.toColor}
+  accent={data.accentColor}
+  title={data.name}
+>
+  <section class={`mb-12`}>
+    <div class="relative group">
+      <div
+        class="relative h-64 sm:h-80 md:h-[480px] overflow-hidden rounded-3xl sm:rounded-4xl shadow-2xl shadow-emerald-900/5 ring-1 ring-black/5"
+      >
+        <Image
+          src={data.cover}
+          alt={`Illustrasjon for episoden ${data.name}`}
+          class="w-full h-full object-cover transition-transform duration-700 ease-out will-change-transform"
+          widths={[600, 900, 1200]}
+          sizes="(max-width: 800px) 100vw, 1200px"
+          loading="eager"
+          decoding="async"
+        />
+        {/* Overlays (kept for all sizes) */}
+        <div
+          class="absolute inset-0 bg-[var(--bg-to)]/70 sm:bg-[var(--bg-to)]/60 md:bg-[var(--bg-to)]/50 mix-blend-multiply"
+        >
+        </div>
+        <div
+          class="absolute inset-0 backdrop-blur-[1.5px] sm:backdrop-blur-[2px]"
+        >
+        </div>
+        <div
+          class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"
+        >
+        </div>
+        {/* Overlay text panel only on md+ */}
+        <div
+          class="hidden md:block absolute bottom-0 left-0 right-0 p-6 lg:p-10"
+        >
+          <div
+            class="bg-white/12 backdrop-blur-md ring-1 ring-white/15 rounded-2xl px-6 py-6 flex flex-col gap-5 shadow-lg shadow-black/25"
+          >
+            <div class="flex flex-wrap gap-3 items-start">
+              <h1
+                class="text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.45)]"
+              >
+                {data.name}
+              </h1>
+              <div class="flex flex-wrap gap-2 mt-1 lg:mt-2">
+                <span
+                  class="px-3 py-1 rounded-full text-xs font-semibold bg-black/35 text-white backdrop-blur ring-1 ring-white/15"
+                >
+                  {data.length}
+                </span>
+                <span
+                  class="px-3 py-1 rounded-full text-xs font-medium bg-black/30 text-white backdrop-blur ring-1 ring-white/15"
+                >
+                  {data.published}
+                </span>
+              </div>
+            </div>
+            <p
+              class="max-w-2xl text-base lg:text-lg leading-snug font-medium text-white/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+            >
+              {data.description}
+            </p>
+            <div>
+              <a
+                href="#avspilling"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-semibold text-white shadow-lg shadow-black/40 hover:shadow-black/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 transition-all bg-[var(--accent)] hover:brightness-110 active:scale-[0.98]"
+              >
+                ▶︎ Spill av episoden
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Separate content panel for mobile / small screens */}
+      <div class="mt-4 md:hidden">
+        <div
+          class="bg-white/70 backdrop-blur-md ring-1 ring-black/10 rounded-2xl px-5 py-5 flex flex-col gap-4 shadow-md"
+        >
+          <div class="flex flex-col gap-3">
+            <h1
+              class="text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900"
+            >
+              {data.name}
+            </h1>
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="px-3 py-1 rounded-full text-xs font-semibold bg-gray-900/80 text-white"
+              >
+                {data.length}
+              </span>
+              <span
+                class="px-3 py-1 rounded-full text-xs font-medium bg-gray-800/70 text-white"
+              >
+                {data.published}
+              </span>
+            </div>
+          </div>
+          <p
+            class="text-sm leading-snug font-medium text-gray-800/90 line-clamp-5"
+          >
+            {data.description}
+          </p>
+          <div>
+            <a
+              href="#avspilling"
+              class="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-white shadow-md shadow-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/70 transition bg-[var(--accent)] hover:brightness-110 active:scale-[0.98]"
+            >
+              ▶︎ Spill av episoden
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid gap-16">
+    <section
+      id="avspilling"
+      class="bg-[var(--accent)]/30 backdrop-blur rounded-3xl p-8 ring-1 ring-black/5"
+    >
+      <h2 class="text-2xl font-bold mb-4 text-[var(--accent)]">Lytt</h2>
+      <div
+        class="aspect-video w-full rounded-xl flex items-center justify-center text-[var(--accent)] font-bold"
+      >
+        (Player kommer her)
+      </div>
+    </section>
+
+    <section class="pb-4">
+      <nav
+        class="flex flex-col sm:flex-row justify-between gap-6 text-sm font-semibold"
+      >
+        {
+          (async () => {
+            const all = await getCollection("episodes");
+            const sorted = all.sort((a, b) =>
+              a.data.published < b.data.published ? 1 : -1,
+            );
+            const index = sorted.findIndex((e) => e.id === episode.id);
+            const prev = index > 0 ? sorted[index - 1] : null;
+            const next = index < sorted.length - 1 ? sorted[index + 1] : null;
+            return (
+              <>
+                <div class="min-w-0 flex-1">
+                  {prev && (
+                    <a
+                      class="group flex items-start gap-3 max-w-sm"
+                      href={`${import.meta.env.BASE_URL}episodes/${prev.id}`}
+                    >
+                      <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 ring-1 ring-black/10 group-hover:bg-white transition-colors">
+                        ←
+                      </span>
+                      <span class="flex flex-col">
+                        <span class="text-[var(--accent)]/70 text-xs tracking-wide">
+                          Forrige episode
+                        </span>
+                        <span class="text-[var(--accent)] font-bold group-hover:underline">
+                          {prev.data.name}
+                        </span>
+                      </span>
+                    </a>
+                  )}
+                </div>
+                <div class="min-w-0 flex-1 text-right">
+                  {next && (
+                    <a
+                      class="group flex items-start gap-3 max-w-sm ml-auto text-right justify-end"
+                      href={`${import.meta.env.BASE_URL}episodes/${next.id}`}
+                    >
+                      <span class="flex flex-col items-end">
+                        <span class="text-[var(--accent)]/80 text-xs tracking-wide">
+                          Neste episode
+                        </span>
+                        <span class="text-[var(--accent)] line-clamp-2 font-bold group-hover:underline">
+                          {next.data.name}
+                        </span>
+                      </span>
+                      <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 ring-1 ring-black/10 group-hover:bg-white transition-colors">
+                        →
+                      </span>
+                    </a>
+                  )}
+                </div>
+              </>
+            );
+          })()
+        }
+      </nav>
+    </section>
+  </div>
+</BaseLayout>

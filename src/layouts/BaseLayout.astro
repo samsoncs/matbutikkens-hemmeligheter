@@ -1,20 +1,40 @@
 ---
 import "../styles/global.css";
 import "@fontsource/fredoka/700";
-const { title } = Astro.props;
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+  title: string;
+  bgFrom: string;
+  bgTo: string;
+  accent: string;
+}
+
+const { title, bgFrom, bgTo, accent } = Astro.props;
+
+// We always use the same utility classes; custom colors flow through CSS vars.
+const bodyGradientClasses =
+  bgFrom && bgTo
+    ? "bg-gradient-to-br from-[var(--bg-from)] to-[var(--bg-to)]"
+    : "bg-gradient-to-br from-emerald-50 via-lime-50 to-rose-50";
 ---
 
 <html lang="no">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ClientRouter />
   </head>
   <body
-    class="text-emerald-950 antialiased bg-gradient-to-br from-emerald-50 via-lime-50 to-rose-50 text-emerald-950"
+    class={`text-emerald-950 antialiased ${bodyGradientClasses}`}
+    data-bg-from={bgFrom}
+    data-bg-to={bgTo}
+    data-accent={accent}
+    style={bgFrom && bgTo ? `--bg-from:${bgFrom};--bg-to:${bgTo};` : undefined}
   >
     <nav
       id="site-nav"
-      class="sticky top-0 z-20 text-emerald-800 bg-gradient-to-br from-emerald-50 to-lime-50 mb-2 transition-all duration-100 ease-in-out"
+      class={`sticky top-0 z-20 text-[var(--accent)]  mb-2 transition-all duration-100 ease-in-out`}
     >
       <div class="flex items-center mx-auto max-w-6xl p-4 font-bold">
         <div class="flex-grow">
@@ -37,37 +57,36 @@ const { title } = Astro.props;
         </div>
       </div>
     </nav>
-    <article>
+    <article class="mx-auto max-w-6xl min-h-screen">
       <slot />
     </article>
     <script is:inline>
-      const nav = document.getElementById("site-nav");
-
-      const solidClasses = [
-        "bg-gradient-to-br",
-        "from-emerald-50/95",
-        "to-lime-50/95",
-        "backdrop-blur",
-        "shadow-md/5",
-      ];
-
-      function updateNav() {
-        if (window.scrollY > 0) {
-          solidClasses.forEach((c) => nav.classList.add(c));
-        } else {
-          solidClasses.forEach((c) => nav.classList.remove(c));
+      (function () {
+        function applyVars() {
+          const body = document.body;
+          const from = body.dataset.bgFrom;
+          const to = body.dataset.bgTo;
+          const accent = body.dataset.accent;
+          if (from && to && accent) {
+            body.style.setProperty("--bg-from", from);
+            body.style.setProperty("--bg-to", to);
+            body.style.setProperty("--accent", accent);
+          }
         }
-      }
-
-      updateNav();
-      window.addEventListener("scroll", updateNav, { passive: true });
-
-      document.addEventListener("astro:before-swap", () => {
-        window.removeEventListener("scroll", updateNav);
-      });
+        function updateScrolled() {
+          const nav = document.getElementById("site-nav");
+          if (nav) nav.classList.toggle("is-scrolled", window.scrollY > 0);
+        }
+        applyVars();
+        updateScrolled();
+        window.addEventListener("scroll", updateScrolled, { passive: true });
+        document.addEventListener("astro:after-swap", () => {
+          applyVars();
+          updateScrolled();
+        });
+      })();
     </script>
-  </body>
-  <footer class="bg-emerald-900 text-white py-8 px-8">
+  </body><footer class="bg-emerald-900 text-white py-8 px-8">
     <section
       class="flex flex-col items-center justify-center mx-auto max-w-6xl px-2 md:px-4 mb-8"
     >

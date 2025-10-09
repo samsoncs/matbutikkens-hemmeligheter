@@ -123,10 +123,10 @@ const { data } = episode;
                         ←
                       </span>
                       <span class="flex flex-col">
-                        <span class="text-emerald-800/70 text-xs tracking-wide">
+                        <span class="text-[var(--accent)]/70 text-xs tracking-wide">
                           Forrige episode
                         </span>
-                        <span class="text-emerald-900 font-bold group-hover:underline">
+                        <span class="text-[var(--accent)] font-bold group-hover:underline">
                           {prev.data.name}
                         </span>
                       </span>
@@ -140,7 +140,7 @@ const { data } = episode;
                       href={`${import.meta.env.BASE_URL}episodes/${next.id}`}
                     >
                       <span class="flex flex-col items-end">
-                        <span class="text-[var(--accent)] text-xs tracking-wide">
+                        <span class="text-[var(--accent)]/80 text-xs tracking-wide">
                           Neste episode
                         </span>
                         <span class="text-[var(--accent)] line-clamp-2 font-bold group-hover:underline">

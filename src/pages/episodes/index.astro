@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Episode from "../_components/Episode.astro";
 import { getCollection } from "astro:content";
-const episodes = (await getCollection("episodes")).slice(0, 2);
+const episodes = await getCollection("episodes");
 ---
 
 <BaseLayout
@@ -13,7 +13,7 @@ const episodes = (await getCollection("episodes")).slice(0, 2);
 >
   <div>
     <h1 class="text-4xl font-extrabold mb-6">Episoder</h1>
-    <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-8 mb-8">
       {
         episodes.map(({ id, data }) => (
           <Episode

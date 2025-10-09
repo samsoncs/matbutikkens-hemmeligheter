@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
   const episodes = await getCollection("episodes");
@@ -28,18 +29,135 @@ const { data } = episode;
   accent={data.accentColor}
   title={data.name}
 >
-  <div class="text-[var(--accent)] space-y-4 [view-transition-name:episode]">
-    <h1 class="text-3xl md:text-4xl font-bold">{data.name}</h1>
-    <p class="opacity-90 leading-relaxed">{data.description}</p>
+  <section class={`mb-12`}>
+    <div class="relative group">
+      <div
+        class="relative h-64 sm:h-80 md:h-[480px] overflow-hidden rounded-4xl shadow-2xl shadow-emerald-900/5 ring-1 ring-black/5"
+      >
+        <Image
+          src={data.cover}
+          alt={`Illustrasjon for episoden ${data.name}`}
+          class="w-full h-full object-cover transition-transform duration-700 ease-out"
+          widths={[600, 900, 1200]}
+          sizes="(max-width: 800px) 100vw, 1200px"
+          loading="eager"
+          decoding="async"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[var(--bg-to)]/90 via-[var(--bg-to)]/30 to-transparent"
+        >
+        </div>
+        <div
+          class="text-[var(--accent)] absolute bottom-0 left-0 right-0 p-6 sm:p-10 flex flex-col gap-4"
+        >
+          <div class="flex flex-wrap gap-3 items-center">
+            <h1
+              class="text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-sm"
+            >
+              {data.name}
+            </h1>
+            <div class="flex flex-wrap gap-2 mt-2 md:mt-4">
+              <span
+                class="px-3 py-1 rounded-full text-sm font-semibold bg-white/70 backdrop-blur border border-black/10"
+                >{data.length}</span
+              >
+              <span
+                class="px-3 py-1 rounded-full text-sm font-medium bg-white/60 backdrop-blur border border-black/10"
+                >{data.published}</span
+              >
+            </div>
+          </div>
+          <p class="max-w-2xl text-lg md:text-xl leading-snug font-medium">
+            {data.description}
+          </p>
+          <div class="flex gap-4">
+            <a
+              href="#avspilling"
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-semibold text-white shadow-lg shadow-emerald-900/10 hover:shadow-emerald-900/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 transition-colors"
+              style="background: var(--accent);"
+            >
+              ▶︎ Spill av episoden
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <div class="rounded-2xl p-6 border border-black/10"></div>
-
-    <a
-      href="#"
-      class="inline-block mt-4 px-4 py-2 rounded-xl font-semibold text-white"
-      style="background: var(--accent);"
+  <div class="grid gap-16">
+    <section
+      id="avspilling"
+      class="bg-[var(--accent)]/10 backdrop-blur rounded-3xl p-8 ring-1 ring-black/5"
     >
-      Spill av episoden
-    </a>
+      <h2 class="text-2xl font-bold mb-4 text-[var(--accent)]">Lytt</h2>
+      <div
+        class="aspect-video w-full rounded-xl flex items-center justify-center text-[var(--accent)] font-bold"
+      >
+        (Player kommer her)
+      </div>
+    </section>
+
+    <section class="pb-4">
+      <nav
+        class="flex flex-col sm:flex-row justify-between gap-6 text-sm font-semibold"
+      >
+        {
+          // Compute prev/next episodes
+          (async () => {
+            const all = await getCollection("episodes");
+            const sorted = all.sort((a, b) =>
+              a.data.published < b.data.published ? 1 : -1,
+            );
+            const index = sorted.findIndex((e) => e.id === episode.id);
+            const prev = index > 0 ? sorted[index - 1] : null;
+            const next = index < sorted.length - 1 ? sorted[index + 1] : null;
+            return (
+              <>
+                <div class="min-w-0 flex-1">
+                  {prev && (
+                    <a
+                      class="group flex items-start gap-3 max-w-sm"
+                      href={`${import.meta.env.BASE_URL}episodes/${prev.id}`}
+                    >
+                      <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 ring-1 ring-black/10 group-hover:bg-white transition-colors">
+                        ←
+                      </span>
+                      <span class="flex flex-col">
+                        <span class="text-emerald-800/70 text-xs tracking-wide">
+                          Forrige episode
+                        </span>
+                        <span class="text-emerald-900 font-bold group-hover:underline">
+                          {prev.data.name}
+                        </span>
+                      </span>
+                    </a>
+                  )}
+                </div>
+                <div class="min-w-0 flex-1 text-right">
+                  {next && (
+                    <a
+                      class="group flex items-start gap-3 max-w-sm ml-auto text-right justify-end"
+                      href={`${import.meta.env.BASE_URL}episodes/${next.id}`}
+                    >
+                      <span class="flex flex-col items-end">
+                        <span class="text-[var(--accent)] text-xs tracking-wide">
+                          Neste episode
+                        </span>
+                        <span class="text-[var(--accent)] line-clamp-2 font-bold group-hover:underline">
+                          {next.data.name}
+                        </span>
+                      </span>
+                      <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/70 ring-1 ring-black/10 group-hover:bg-white transition-colors">
+                        →
+                      </span>
+                    </a>
+                  )}
+                </div>
+              </>
+            );
+          })()
+        }
+      </nav>
+    </section>
   </div>
 </BaseLayout>

@@ -17,9 +17,8 @@ h6 {
   font-family: "Fredoka", cursive;
 }
 
-/* Scrolled nav state utility (applied via JS adding .is-scrolled) */
 @layer components {
   .is-scrolled#site-nav {
-    @apply bg-gradient-to-br from-[var(--bg-from)]/95 to-[var(--bg-to)]/95 backdrop-blur shadow-md;
+    @apply bg-gradient-to-br from-[var(--bg-from)]/95 to-[var(--bg-to)]/95 backdrop-blur shadow-md/5;
   }
 }

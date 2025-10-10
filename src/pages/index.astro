@@ -86,6 +86,8 @@ const episodes = (await getCollection("episodes")).slice(0, 2);
               image={data.cover}
               description={data.description}
               id={id}
+              background={data.fromColor}
+              accent={data.accentColor}
             />
           ))
         }

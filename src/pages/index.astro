@@ -4,7 +4,7 @@ import Episode from "./_components/Episode.astro";
 import { Image } from "astro:assets";
 import brobert from "../assets/brobert.png";
 import { getCollection } from "astro:content";
-const episodes = (await getCollection("episodes")).slice(0, 2);
+const episodes = (await getCollection("episodes")).slice(0, 3);
 ---
 
 <BaseLayout
@@ -14,7 +14,7 @@ const episodes = (await getCollection("episodes")).slice(0, 2);
   title="Hjem"
   noMaxWidth
 >
-  <div class="flex flex-col gap-8 md:gap-12 px-2 md:px-4 pb-8">
+  <div class="px-2 md:px-4 flex flex-col gap-8 md:gap-12 pb-8">
     <section
       class="max-w-6xl mx-auto relative overflow-hidden bg-gradient-to-br from-emerald-100 via-emerald-50/70 to-teal-100/70 rounded-4xl shadow-xl shadow-emerald-800/5"
     >
@@ -76,27 +76,37 @@ const episodes = (await getCollection("episodes")).slice(0, 2);
     <section class="max-w-3xl mx-auto">
       <h2 class="text-emerald-600 text-xl font-bold mb-4">Siste episoder</h2>
 
-      <div class="flex flex-col gap-8 mb-8">
-        {
-          episodes.map(({ id, data }) => (
-            <Episode
-              name={data.name}
-              published={data.published}
-              length={data.length}
-              image={data.cover}
-              description={data.description}
-              id={id}
-            />
-          ))
-        }
-      </div>
-
-      <div class="flex justify-center">
-        <a
-          href={`${import.meta.env.BASE_URL}episodes/`}
-          class="bg-rose-500 font-semibold text-white px-4 py-2 rounded-full"
-          >Alle episoder</a
+      <div class="relative">
+        <div
+          id="episodes-preview"
+          class="grid auto-rows-max content-start gap-8 overflow-hidden
+                 max-h-[860px] md:max-h-[480px]
+                 [mask-image:linear-gradient(to_bottom,black_0%,black_88%,transparent_100%)]
+                 [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_88%,transparent_100%)]"
         >
+          {
+            episodes.map(({ id, data }) => (
+              <Episode
+                name={data.name}
+                published={data.published}
+                length={data.length}
+                image={data.cover}
+                description={data.description}
+                id={id}
+                background={data.fromColor}
+                accent={data.accentColor}
+              />
+            ))
+          }
+        </div>
+
+        <div class="absolute inset-x-0 bottom-4 flex justify-center z-20">
+          <a
+            href={`${import.meta.env.BASE_URL}episodes/`}
+            class="bg-rose-500 font-semibold text-white px-5 py-2 rounded-full shadow hover:bg-rose-600 transition"
+            >Alle episoder</a
+          >
+        </div>
       </div>
     </section>
   </div>

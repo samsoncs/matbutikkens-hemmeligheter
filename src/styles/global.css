@@ -22,3 +22,15 @@ h6 {
     @apply bg-gradient-to-br from-[var(--bg-from)]/95 to-[var(--bg-to)]/95 backdrop-blur shadow-md/5;
   }
 }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

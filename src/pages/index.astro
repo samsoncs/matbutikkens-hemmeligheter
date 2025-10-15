@@ -76,13 +76,13 @@ const episodes = (await getCollection("episodes")).slice(0, 3);
     <section class="max-w-3xl mx-auto">
       <h2 class="text-emerald-600 text-xl font-bold mb-4">Siste episoder</h2>
 
-      <div class="relative">
+      <div class="relative mb-8">
         <div
           id="episodes-preview"
           class="grid auto-rows-max content-start gap-8 overflow-hidden
                  max-h-[860px] md:max-h-[480px]
-                 [mask-image:linear-gradient(to_bottom,black_0%,black_88%,transparent_100%)]
-                 [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_88%,transparent_100%)]"
+                 [mask-image:linear-gradient(to_bottom,black_0%,black_76%,transparent_100%)]
+                 [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_76%,transparent_100%)]"
         >
           {
             episodes.map(({ id, data }) => (
@@ -99,14 +99,13 @@ const episodes = (await getCollection("episodes")).slice(0, 3);
             ))
           }
         </div>
-
-        <div class="absolute inset-x-0 bottom-4 flex justify-center z-20">
-          <a
-            href={`${import.meta.env.BASE_URL}episodes/`}
-            class="bg-rose-500 font-semibold text-white px-5 py-2 rounded-full shadow hover:bg-rose-600 transition"
-            >Alle episoder</a
-          >
-        </div>
+      </div>
+      <div class="flex justify-center">
+        <a
+          href={`${import.meta.env.BASE_URL}episodes/`}
+          class="bg-rose-500 font-semibold text-white px-5 py-2 rounded-full shadow hover:bg-rose-600 transition"
+          >Alle episoder</a
+        >
       </div>
     </section>
   </div>

@@ -51,10 +51,12 @@ const translucentBg = oklchWithAlpha(background, 0.4);
     <h3 style={{ color: accent }} class="text-xl font-bold mb-2">
       {name}
     </h3>
-    <div style={{ color: accent }} class="font-bold mb-1">
-      Varighet: {length} | Utgitt: {published}
+    <div style={{ color: accent }} class="font-semibold mb-1">
+      Varighet: <span class="font-normal">{length}</span> • Utgitt: <span
+        class="font-normal">{published}</span
+      >
     </div>
-    <p class="text-base leading-5 mb-4">
+    <p class="text-base leading-5 mb-6">
       {description}
     </p>
     <div>

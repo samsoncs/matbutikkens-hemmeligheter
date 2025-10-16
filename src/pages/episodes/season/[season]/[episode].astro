@@ -1,26 +1,30 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
+import { GetEpisodeDataBySlug } from "../../../../lib/getEpisodeDataBySlug";
 
 export async function getStaticPaths() {
   const episodes = await getCollection("episodes");
 
-  return episodes.map((e) => ({
-    params: { slug: e.id },
+  const sortedEpisodes = episodes.map((e) =>
+    GetEpisodeDataBySlug(episodes, e.id),
+  );
+
+  return sortedEpisodes.map((e) => ({
+    params: { season: e.meta.season, episode: e.meta.episode },
     props: { episode: e },
   }));
 }
 
-const { slug } = Astro.params;
-if (!slug) throw new Error("Missing slug param");
+const { season } = Astro.params;
+if (!season) throw new Error("Missing season param");
 
-const episode = Astro.props.episode;
-if (!episode) {
-  throw new Error(`Missing episode prop for slug "${slug}"`);
-}
+const { episode } = Astro.props;
+if (!episode) throw new Error("Missing episode prop");
 
 const { data } = episode;
+if (!data) throw new Error("Missing episode data");
 ---
 
 <BaseLayout

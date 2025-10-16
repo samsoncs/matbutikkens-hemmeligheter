@@ -4,7 +4,15 @@ import Episode from "./_components/Episode.astro";
 import { Image } from "astro:assets";
 import brobert from "../assets/brobert.png";
 import { getCollection } from "astro:content";
-const episodes = (await getCollection("episodes")).slice(0, 3);
+import { GetEpisodeDataBySlug } from "../lib/getEpisodeDataBySlug";
+const episodes = await getCollection("episodes");
+
+const sortedEpisodes = episodes
+  .map((e) => GetEpisodeDataBySlug(episodes, e.id))
+  .sort((a, b) => (a.data.published < b.data.published ? 1 : -1));
+
+const seasons = Array.from(new Set(sortedEpisodes.map((ep) => ep.meta.season)));
+const lastSeason = Math.max(...seasons);
 ---
 
 <BaseLayout
@@ -43,7 +51,7 @@ const episodes = (await getCollection("episodes")).slice(0, 3);
               >Hør nå ▶︎</button
             >
             <a
-              href={`${import.meta.env.BASE_URL}episodes`}
+              href={`${import.meta.env.BASE_URL}episodes/season/${lastSeason}`}
               class="z-10 bg-white font-semibold text-emerald-800 px-4 py-2 rounded-full ring-3 ring-emerald-300"
               >Siste episoder ➜</a
             >
@@ -85,24 +93,27 @@ const episodes = (await getCollection("episodes")).slice(0, 3);
                  [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_76%,transparent_100%)]"
         >
           {
-            episodes.map(({ id, data }) => (
-              <Episode
-                name={data.name}
-                published={data.published}
-                length={data.length}
-                image={data.cover}
-                description={data.description}
-                id={id}
-                background={data.fromColor}
-                accent={data.accentColor}
-              />
-            ))
+            sortedEpisodes
+              .slice(0, 3)
+              .map(({ meta, data }) => (
+                <Episode
+                  season={meta.season}
+                  name={data.name}
+                  published={data.published}
+                  length={data.length}
+                  image={data.cover}
+                  description={data.description}
+                  id={meta.episode}
+                  background={data.fromColor}
+                  accent={data.accentColor}
+                />
+              ))
           }
         </div>
       </div>
       <div class="flex justify-center">
         <a
-          href={`${import.meta.env.BASE_URL}episodes/`}
+          href={`${import.meta.env.BASE_URL}episodes/season/${lastSeason}`}
           class="bg-rose-500 font-semibold text-white px-5 py-2 rounded-full shadow hover:bg-rose-600 transition"
           >Alle episoder</a
         >

@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { GetEpisodeDataBySlug } from "../../../../lib/getEpisodeDataBySlug";
+import Episode from "../../../_components/Episode.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const episodes = await getCollection("episodes");
+
+  const sortedEpisodes = episodes.map((e) =>
+    GetEpisodeDataBySlug(episodes, e.id),
+  );
+
+  const seasons = Array.from(
+    new Set(sortedEpisodes.map((ep) => ep.meta.season)),
+  );
+
+  return seasons.map((s) => ({
+    params: { season: s },
+    props: { season: s },
+  }));
+}
+
+const episodes = await getCollection("episodes");
+
+const sortedEpisodes = episodes
+  .map((e) => GetEpisodeDataBySlug(episodes, e.id))
+  .sort((a, b) => (a.data.published < b.data.published ? 1 : -1));
+
+const seasons = Array.from(
+  new Set(sortedEpisodes.map((ep) => ep.meta.season)),
+).sort((a, b) => a - b);
+
+const episodesInSeason = sortedEpisodes.filter(
+  (e) => e.meta.season === Number(Astro.params.season),
+);
+---
+
+<BaseLayout
+  title="Episoder"
+  bgFrom="oklch(98.6% 0.031 120.757)"
+  bgTo="oklch(96.9% 0.015 12.422)"
+  accent="oklch(59.6% 0.145 163.225)"
+>
+  <div class="max-w-3xl mx-auto">
+    <div class="w-full flex gap-4 mb-8 pl-3">
+      {
+        seasons.map((s) => (
+          <a
+            href={`${import.meta.env.BASE_URL}episodes/season/${s}`}
+            class={`${s === Number(Astro.params.season) ? "bg-emerald-800 ring-3 ring-emerald-700 hover:bg-emerald-800 text-white" : "text-emerald-800"} font-semibold px-4 py-1 rounded-full hover:cursor-pointer transition active:translate-y-[1px] hover:shadow-lg hover:scale-[1.02]`}
+          >
+            {`Sesong ${s}`}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="flex flex-col gap-8 mb-8">
+      {
+        episodesInSeason.map(({ data, meta }) => (
+          <Episode
+            season={meta.season}
+            name={data.name}
+            published={data.published}
+            length={data.length}
+            image={data.cover}
+            description={data.description}
+            id={meta.episode}
+            background={data.fromColor}
+            accent={data.accentColor}
+          />
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

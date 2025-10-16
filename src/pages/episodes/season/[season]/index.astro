@@ -25,7 +25,7 @@ const episodes = await getCollection("episodes");
 
 const sortedEpisodes = episodes
   .map((e) => GetEpisodeDataBySlug(episodes, e.id))
-  .sort((a, b) => (a.data.published < b.data.published ? 1 : -1));
+  .sort((a, b) => (b.data.published < a.data.published ? 1 : -1));
 
 const seasons = Array.from(
   new Set(sortedEpisodes.map((ep) => ep.meta.season)),
@@ -34,6 +34,11 @@ const seasons = Array.from(
 const episodesInSeason = sortedEpisodes.filter(
   (e) => e.meta.season === Number(Astro.params.season),
 );
+
+const now = new Date();
+const newestPublishedInSeason = [...episodesInSeason]
+  .reverse()
+  .find((e) => new Date(e.data.published) <= now);
 ---
 
 <BaseLayout
@@ -58,8 +63,9 @@ const episodesInSeason = sortedEpisodes.filter(
 
     <div class="flex flex-col gap-8 mb-8">
       {
-        episodesInSeason.map(({ data, meta }) => (
+        episodesInSeason.map(({ id, data, meta }) => (
           <Episode
+            isCurrent={newestPublishedInSeason?.id === id}
             season={meta.season}
             name={data.name}
             published={data.published}

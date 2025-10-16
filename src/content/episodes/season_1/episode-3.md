@@ -1,6 +1,6 @@
 ---
 name: "Bananen Bananders"
-published: "2025-11-18"
+published: "2025-10-17"
 length: "11:49"
 cover: "../../../assets/ep3.png"
 description: "Bananders er rampete, men en dag går det litt for langt."

@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { format, differenceInCalendarDays, isAfter } from "date-fns";
 
 interface Props {
   season: number;
@@ -11,6 +12,7 @@ interface Props {
   id: string;
   background: string;
   accent: string;
+  isCurrent?: boolean;
 }
 
 const {
@@ -23,6 +25,7 @@ const {
   id,
   background,
   accent,
+  isCurrent,
 } = Astro.props;
 
 function oklchWithAlpha(color: string, alpha = 0.55) {
@@ -35,46 +38,113 @@ function oklchWithAlpha(color: string, alpha = 0.55) {
   });
 }
 
-const translucentBg = oklchWithAlpha(background, 0.4);
+function parseLocalDate(isoDate: string) {
+  return new Date(`${isoDate}T00:00:00`);
+}
+const pub = parseLocalDate(published);
+const today = new Date();
+const diffDays = differenceInCalendarDays(pub, today);
+const isUpcoming = isAfter(pub, today);
+let upcomingLabel: string | null = null;
+if (isUpcoming) {
+  if (diffDays > 30) {
+    upcomingLabel = `Kommer: ${format(pub, "dd.MM.yyyy")}`;
+  } else if (diffDays > 0) {
+    upcomingLabel = `Kommer om ${diffDays} ${diffDays === 1 ? "dag" : "dager"}`;
+  }
+}
+
+const translucentBg = isUpcoming
+  ? oklchWithAlpha("oklch(70.7% 0.022 261.325)", 0.25)
+  : oklchWithAlpha(background, 0.4);
+
+const accentColor = isUpcoming ? "oklch(37.3% 0.034 259.733)" : accent;
+
+const formattedPublishDate = format(pub, "dd.MM.yyyy");
 ---
 
 <div
-  class="overflow-hidden bg-white rounded-4xl shadow-xl shadow-emerald-800/5
-            flex flex-col sm:grid sm:grid-cols-12"
+  class="overflow-hidden bg-white rounded-4xl shadow-xl shadow-emerald-800/5 flex flex-col sm:grid sm:grid-cols-12"
+  style={{
+    border: isCurrent
+      ? `4px solid color-mix(in oklch, ${accentColor} 80%, transparent)`
+      : undefined,
+    boxShadow: isCurrent
+      ? `0 0 15px color-mix(in oklch, ${accentColor} 50%, transparent)`
+      : undefined,
+  }}
 >
-  <div
-    class="sm:col-span-4 sm:col-start-9 md:col-span-3 md:col-start-10 flex justify-center"
-  >
+  <div class="relative col-span-4 md:col-span-3 flex justify-center">
     <Image
-      class={`inset-0 w-full h-40 sm:h-full object-cover`}
+      class={`inset-0 w-full h-40 sm:h-full object-cover transition-opacity duration-300 ${
+        isUpcoming ? "opacity-60" : ""
+      }`}
       src={image}
       width={300}
       height={300}
       alt={`Illustrasjon for episoden ${name}`}
     />
+    {
+      upcomingLabel && (
+        <>
+          <div class="absolute inset-0 bg-black/55 backdrop-blur-[1px]" />
+          <span
+            class={`absolute top-4 left-5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide text-white shadow-lg shadow-black/20`}
+            style={{ background: "oklch(21% 0.034 264.665)" }}
+          >
+            🕒 {upcomingLabel}
+          </span>
+        </>
+      )
+    }
+    {
+      isCurrent && (
+        <span
+          aria-label="Ny episode"
+          class={`absolute top-4 left-5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide text-white shadow-lg shadow-black/20`}
+          style={{ background: accentColor }}
+        >
+          Ny
+        </span>
+      )
+    }
   </div>
 
   <div
-    class="p-6 sm:py-6 sm:px-8 sm:col-span-8 md:col-span-9 sm:col-start-1 sm:row-start-1 xl:pr-12"
+    class="p-6 sm:py-6 sm:px-8 col-span-8 md:col-span-9 xl:pr-12"
     style={{ background: translucentBg }}
   >
-    <h3 style={{ color: accent }} class="text-xl font-bold mb-2">
+    <h3
+      style={{ color: accentColor }}
+      class={`text-xl ${isUpcoming ? "font-normal" : "font-bold"} mb-2`}
+    >
       {name}
     </h3>
-    <div style={{ color: accent }} class="font-semibold mb-1">
-      Varighet: <span class="font-normal">{length}</span> • Utgitt: <span
-        class="font-normal">{published}</span
-      >
+    <div style={{ color: accentColor }} class="font-semibold mb-1">
+      Varighet: <span class="font-normal">{length}</span>
+      {
+        !isUpcoming && (
+          <>
+            • Utgitt: <span class="font-normal">{formattedPublishDate}</span>
+          </>
+        )
+      }
     </div>
     <p class="text-base leading-5 mb-6">
       {description}
     </p>
     <div>
-      <a
-        href={`${import.meta.env.BASE_URL}episodes/season/${season}/${id}`}
-        class="font-semibold text-white px-4 py-2 rounded-full"
-        style={{ background: accent }}>Hør nå</a
-      >
+      {
+        !isUpcoming && (
+          <a
+            href={`${import.meta.env.BASE_URL}episodes/season/${season}/${id}`}
+            class="font-semibold text-white px-4 py-2 rounded-full hover:brightness-110 transition"
+            style={{ background: accentColor }}
+          >
+            Hør nå
+          </a>
+        )
+      }
     </div>
   </div>
 </div>

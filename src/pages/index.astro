@@ -4,6 +4,7 @@ import Episode from "./_components/Episode.astro";
 import { Image } from "astro:assets";
 import brobert from "../assets/brobert.png";
 import { getCollection } from "astro:content";
+import { isAfter } from "date-fns";
 import { GetEpisodeDataBySlug } from "../lib/getEpisodeDataBySlug";
 const episodes = await getCollection("episodes");
 
@@ -13,6 +14,19 @@ const sortedEpisodes = episodes
 
 const seasons = Array.from(new Set(sortedEpisodes.map((ep) => ep.meta.season)));
 const lastSeason = Math.max(...seasons);
+
+const now = new Date();
+const publishedEpisodes = sortedEpisodes.filter(
+  (e) => !isAfter(new Date(e.data.published), now),
+);
+const upcomingEpisodes = sortedEpisodes
+  .filter((e) => isAfter(new Date(e.data.published), now))
+  .sort(
+    (a, b) =>
+      new Date(a.data.published).getTime() -
+      new Date(b.data.published).getTime(),
+  );
+const previewEpisodes = [...publishedEpisodes, ...upcomingEpisodes].slice(0, 3);
 ---
 
 <BaseLayout
@@ -93,21 +107,20 @@ const lastSeason = Math.max(...seasons);
                  [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_76%,transparent_100%)]"
         >
           {
-            sortedEpisodes
-              .slice(0, 3)
-              .map(({ meta, data }) => (
-                <Episode
-                  season={meta.season}
-                  name={data.name}
-                  published={data.published}
-                  length={data.length}
-                  image={data.cover}
-                  description={data.description}
-                  id={meta.episode}
-                  background={data.fromColor}
-                  accent={data.accentColor}
-                />
-              ))
+            previewEpisodes.map(({ meta, data }, i) => (
+              <Episode
+                isCurrent={i === 0}
+                season={meta.season}
+                name={data.name}
+                published={data.published}
+                length={data.length}
+                image={data.cover}
+                description={data.description}
+                id={meta.episode}
+                background={data.fromColor}
+                accent={data.accentColor}
+              />
+            ))
           }
         </div>
       </div>
@@ -128,8 +141,6 @@ const lastSeason = Math.max(...seasons);
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="none"
     >
-      <!-- Top is transparent (shows previous white area),
-           bottom filled with gradient start color (#047857 ~ emerald-700). -->
       <path
         d="M0 50 C 240 110 480 0 720 60 C 960 120 1200 40 1440 70 L1440 160 L0 160 Z"
         fill="#047857"></path>

@@ -3,6 +3,7 @@ import "../styles/global.css";
 import "@fontsource/fredoka/700";
 import "@fontsource/fredoka/500";
 import { ClientRouter } from "astro:transitions";
+import Navbar from "./_components/Navbar.astro";
 
 interface Props {
   title: string;
@@ -34,31 +35,7 @@ const bodyGradientClasses =
     data-accent={accent}
     style={bgFrom && bgTo ? `--bg-from:${bgFrom};--bg-to:${bgTo};` : undefined}
   >
-    <nav
-      id="site-nav"
-      class={`sticky top-0 z-20 text-[var(--accent)]  mb-2 transition-all duration-100 ease-in-out`}
-    >
-      <div class="flex items-center mx-auto max-w-6xl p-4 font-bold">
-        <div class="flex-grow">
-          <!-- TODO: Don't use H3 to change style, use tailwind class for font -->
-          <h3 class="text-2xl">
-            <a href={`${import.meta.env.BASE_URL}`}
-              ><span
-                class="bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-pink-600"
-                >M</span
-              ><span
-                class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600"
-                >H</span
-              ></a
-            >
-          </h3>
-        </div>
-        <div class="flex gap-4 md:gap-6">
-          <a href={`${import.meta.env.BASE_URL}episodes`}>Episoder</a>
-          <a href="#">Meny</a>
-        </div>
-      </div>
-    </nav>
+    <Navbar />
     <article
       class={`min-h-screen ${noMaxWidth ? "" : "px-2 md:px-4 mx-auto max-w-6xl "}`}
     >

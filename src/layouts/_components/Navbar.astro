@@ -1,0 +1,82 @@
+---
+import Link from "../../pages/_components/Link.astro";
+import CrossIcon from "./Navbar/CrossIcon.astro";
+import DesktopLinks from "./Navbar/DesktopLinks.astro";
+import HamburgerIcon from "./Navbar/HamburgerIcon.astro";
+import Logo from "./Navbar/Logo.astro";
+import MobileLinks from "./Navbar/MobileLinks.astro";
+---
+
+<nav
+  id="site-nav"
+  class={`sticky top-0 z-30 text-[var(--accent)]  mb-2 transition-all duration-100 ease-in-out`}
+>
+  <div class="flex items-center mx-auto max-w-6xl p-4 font-bold relative">
+    <div class="flex-grow">
+      <!-- TODO: Don't use H3 to change style, use tailwind class for font -->
+      <h3 class="text-2xl">
+        <Link href="">
+          <Logo />
+        </Link>
+      </h3>
+    </div>
+    <DesktopLinks />
+    <div class="sm:hidden">
+      <label
+        for="nav-toggle"
+        class="flex flex-col justify-center gap-1 cursor-pointer"
+        aria-label="Open menu"
+        aria-controls="mobile-drawer"
+        aria-expanded="false"
+      >
+        <HamburgerIcon />
+      </label>
+    </div>
+  </div>
+</nav>
+<input id="nav-toggle" type="checkbox" class="peer hidden" aria-hidden="true" />
+<label
+  for="nav-toggle"
+  class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity peer-checked:opacity-100 peer-checked:pointer-events-auto"
+></label>
+<aside
+  id="mobile-drawer"
+  class="fixed top-0 right-0 z-50 h-dvh w-3/4 max-w-xs dark:from-neutral-900 dark:to-neutral-900/95 border-l border-black/10 dark:border-white/10 shadow-xl translate-x-full peer-checked:translate-x-0 transition-transform duration-300 ease-out will-change-transform flex flex-col pl-6 pr-4 py-4 gap-6"
+>
+  <div class="flex justify-between items-center">
+    <Logo />
+
+    <label
+      for="nav-toggle"
+      class="cursor-pointer text-emerald-800"
+      aria-label="Close menu"
+    >
+      <CrossIcon />
+    </label>
+  </div>
+  <MobileLinks />
+</aside>
+<script>
+  const toggle = document.getElementById(
+    "nav-toggle",
+  ) as HTMLInputElement | null;
+  const trigger = document.querySelector(
+    'label[for="nav-toggle"][aria-controls="mobile-drawer"]',
+  );
+  const body = document.documentElement;
+  if (toggle && trigger) {
+    const sync = () => {
+      const open = toggle.checked;
+      trigger.setAttribute("aria-expanded", String(open));
+      body.classList.toggle("overflow-hidden", open);
+    };
+    toggle.addEventListener("change", sync);
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && toggle.checked) {
+        toggle.checked = false;
+        toggle.dispatchEvent(new Event("change"));
+      }
+    });
+    sync();
+  }
+</script>

@@ -1,0 +1,12 @@
+---
+interface Props {
+  background?: string;
+}
+
+const { background = "bg-linear-to-t from-emerald-100 to-lime-100" } =
+  Astro.props;
+---
+
+<div class={`rounded-3xl px-6 py-8 md:px-8 md:py-6 shadow-sm ${background}`}>
+  <slot />
+</div>

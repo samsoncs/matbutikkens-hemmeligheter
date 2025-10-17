@@ -7,6 +7,7 @@ import { getCollection } from "astro:content";
 import { isAfter } from "date-fns";
 import { GetEpisodeDataBySlug } from "../lib/getEpisodeDataBySlug";
 import Link from "../lib/common/Link.astro";
+import Card from "../lib/common/Card.astro";
 const episodes = await getCollection("episodes");
 
 const sortedEpisodes = episodes
@@ -160,9 +161,7 @@ const previewEpisodes = [...publishedEpisodes, ...upcomingEpisodes].slice(0, 3);
           </p>
         </div>
         <div class="md:col-span-3">
-          <div
-            class="bg-linear-to-t from-emerald-900 to-emerald-900/85 rounded-3xl px-6 py-8 md:px-8 md:py-6 shadow-sm"
-          >
+          <Card background="bg-linear-to-t from-emerald-900 to-emerald-900/85">
             <h2 class="text-xl md:text-2xl font-bold mb-4 text-rose-200">
               Bli kjent med oss!
             </h2>
@@ -196,7 +195,7 @@ const previewEpisodes = [...publishedEpisodes, ...upcomingEpisodes].slice(0, 3);
             >
               Les mer om oss
             </Link>
-          </div>
+          </Card>
         </div>
       </div>
     </section>

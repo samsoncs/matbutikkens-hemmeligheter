@@ -29,6 +29,8 @@ const upcomingEpisodes = sortedEpisodes
       new Date(b.data.published).getTime(),
   );
 const previewEpisodes = [...publishedEpisodes, ...upcomingEpisodes].slice(0, 3);
+const firstTwoEpisodes = previewEpisodes.slice(0, 2);
+const thirdEpisode = previewEpisodes[2];
 ---
 
 <BaseLayout title="Hjem" noMaxWidth>
@@ -95,16 +97,10 @@ const previewEpisodes = [...publishedEpisodes, ...upcomingEpisodes].slice(0, 3);
     <section class="max-w-3xl mx-auto">
       <h2 class="text-emerald-600 text-xl font-bold mb-4">Siste episoder</h2>
 
-      <div class="relative mb-8">
-        <div
-          id="episodes-preview"
-          class="grid auto-rows-max content-start gap-8 overflow-hidden
-                 max-h-[860px] md:max-h-[480px]
-                 [mask-image:linear-gradient(to_bottom,black_0%,black_76%,transparent_100%)]
-                 [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_76%,transparent_100%)]"
-        >
+      <div class="mb-8">
+        <div class="grid gap-8 auto-rows-max content-start">
           {
-            previewEpisodes.map(({ meta, data }, i) => (
+            firstTwoEpisodes.map(({ meta, data }, i) => (
               <Episode
                 isCurrent={i === 0}
                 season={meta.season}
@@ -120,6 +116,29 @@ const previewEpisodes = [...publishedEpisodes, ...upcomingEpisodes].slice(0, 3);
             ))
           }
         </div>
+        {
+          thirdEpisode && (
+            <div class="relative mt-8">
+              <div
+                class="overflow-hidden max-h-[250px] sm:max-h-[60px] [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)]
+  [-webkit-mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)]"
+              >
+                <Episode
+                  isCurrent={false}
+                  season={thirdEpisode.meta.season}
+                  name={thirdEpisode.data.name}
+                  published={thirdEpisode.data.published}
+                  length={thirdEpisode.data.length}
+                  image={thirdEpisode.data.cover}
+                  description={thirdEpisode.data.description}
+                  id={thirdEpisode.meta.episode}
+                  background={thirdEpisode.data.fromColor}
+                  accent={thirdEpisode.data.accentColor}
+                />
+              </div>
+            </div>
+          )
+        }
       </div>
       <div class="flex justify-center">
         <Link

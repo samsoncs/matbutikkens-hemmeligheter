@@ -3,6 +3,7 @@ import BaseLayout from "../../../../layouts/BaseLayout.astro";
 import { GetEpisodeDataBySlug } from "../../../../lib/getEpisodeDataBySlug";
 import Episode from "../../../_components/Episode.astro";
 import { getCollection } from "astro:content";
+import Link from "../../../_components/Link.astro";
 
 export async function getStaticPaths() {
   const episodes = await getCollection("episodes");
@@ -51,12 +52,12 @@ const newestPublishedInSeason = [...episodesInSeason]
     <div class="w-full flex gap-4 mb-8 pl-3">
       {
         seasons.map((s) => (
-          <a
-            href={`${import.meta.env.BASE_URL}episodes/season/${s}`}
+          <Link
+            href={`episodes/season/${s}`}
             class={`${s === Number(Astro.params.season) ? "bg-emerald-800 ring-3 ring-emerald-700 hover:bg-emerald-800 text-white" : "text-emerald-800"} font-semibold px-4 py-1 rounded-full hover:cursor-pointer transition active:translate-y-[1px] hover:shadow-lg hover:scale-[1.02]`}
           >
             {`Sesong ${s}`}
-          </a>
+          </Link>
         ))
       }
     </div>

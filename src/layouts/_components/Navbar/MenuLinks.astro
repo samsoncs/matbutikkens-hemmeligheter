@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { GetEpisodeDataBySlug } from "../../../lib/getEpisodeDataBySlug";
-import Link from "../../../pages/_components/Link.astro";
+import Link from "../../../lib/common/Link.astro";
 
 const episodes = await getCollection("episodes");
 const eps = episodes.map((e) => GetEpisodeDataBySlug(episodes, e.id));
@@ -12,4 +12,5 @@ const lastSeason = Math.max(...seasons);
 <Link href={`episodes/season/${lastSeason}`} class="hover:underline">
   Episoder
 </Link>
+<Link href="about" class="hover:underline">Om oss</Link>
 <Link href="" class="hover:underline">Hjem</Link>

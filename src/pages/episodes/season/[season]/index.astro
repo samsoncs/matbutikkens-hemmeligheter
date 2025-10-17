@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
 import { GetEpisodeDataBySlug } from "../../../../lib/getEpisodeDataBySlug";
-import Episode from "../../../_components/Episode.astro";
+import Episode from "../../../../lib/common/Episode.astro";
 import { getCollection } from "astro:content";
-import Link from "../../../_components/Link.astro";
+import Link from "../../../../lib/common/Link.astro";
 
 export async function getStaticPaths() {
   const episodes = await getCollection("episodes");

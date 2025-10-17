@@ -7,13 +7,19 @@ import Navbar from "./_components/Navbar.astro";
 
 interface Props {
   title: string;
-  bgFrom: string;
-  bgTo: string;
-  accent: string;
+  bgFrom?: string;
+  bgTo?: string;
+  accent?: string;
   noMaxWidth?: boolean;
 }
 
-const { title, bgFrom, bgTo, accent, noMaxWidth = false } = Astro.props;
+const {
+  title,
+  bgFrom = "oklch(98.6% 0.031 120.757)",
+  bgTo = "oklch(96.9% 0.015 12.422)",
+  accent = "oklch(50.8% 0.118 165.612)",
+  noMaxWidth = false,
+} = Astro.props;
 
 // We always use the same utility classes; custom colors flow through CSS vars.
 const bodyGradientClasses =

@@ -28,6 +28,8 @@ if (!episode) throw new Error("Missing episode prop");
 const { data } = episode;
 if (!data) throw new Error("Missing episode data");
 
+const episodeNr = episode.meta.episode.split("-")[1];
+
 const isUpcoming = isAfter(data.published, new Date());
 
 const formattedPublishDate = format(data.published, "dd.MM.yyyy");
@@ -39,7 +41,7 @@ const formattedPublishDate = format(data.published, "dd.MM.yyyy");
   accent={data.accentColor}
   title={data.name}
 >
-  <section class="max-w-3xl mx-auto">
+  <section class="max-w-3xl mx-auto mb-6">
     <Link
       class="block text-[var(--accent)] hover:underline font-bold mb-2"
       href={`episodes/season/${season}`}>Tilbake til sesong {season}</Link
@@ -52,11 +54,15 @@ const formattedPublishDate = format(data.published, "dd.MM.yyyy");
         alt={`Cover for episode ${data.name}`}
       />
     </div>
-    <h1 class="text-3xl font-bold text-[var(--accent)]">
+    <h1 class="text-3xl font-bold text-[var(--accent)] mb-4">
       {data.name}
     </h1>
     <div>
-      <div style={{ color: data.accentColor }} class="font-semibold mb-1">
+      <div style={{ color: data.accentColor }} class="font-semibold mb-4">
+        <span class="bg-black/10 rounded-full px-2 mr-2"
+          >S{season} • E{episodeNr}</span
+        >
+
         Varighet: <span class="font-normal">{data.length}</span>
         {
           !isUpcoming && (
@@ -70,5 +76,8 @@ const formattedPublishDate = format(data.published, "dd.MM.yyyy");
     <p>
       {data.description}
     </p>
+  </section>
+  <section>
+    <h2 class="text-lg font-bold text-[var(--accent)]">Flere episoder</h2>
   </section>
 </BaseLayout>

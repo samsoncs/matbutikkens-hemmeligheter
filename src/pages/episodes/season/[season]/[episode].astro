@@ -41,43 +41,46 @@ const formattedPublishDate = format(data.published, "dd.MM.yyyy");
   accent={data.accentColor}
   title={data.name}
 >
-  <section class="max-w-3xl mx-auto mb-6">
-    <Link
-      class="block text-[var(--accent)] hover:underline font-bold mb-2"
-      href={`episodes/season/${season}`}>Tilbake til sesong {season}</Link
-    >
-    <div class="flex flex-col items-center gap-8 mb-2">
-      <Image
-        class="w-full md:w-4/6 rounded-2xl"
-        width={300}
-        src={data.cover}
-        alt={`Cover for episode ${data.name}`}
-      />
-    </div>
-    <h1 class="text-3xl font-bold text-[var(--accent)] mb-4">
-      {data.name}
-    </h1>
-    <div>
-      <div style={{ color: data.accentColor }} class="font-semibold mb-4">
-        <span class="bg-black/10 rounded-full px-2 mr-2"
-          >S{season} • E{episodeNr}</span
-        >
-
-        Varighet: <span class="font-normal">{data.length}</span>
-        {
-          !isUpcoming && (
-            <>
-              • Utgitt: <span class="font-normal">{formattedPublishDate}</span>
-            </>
-          )
-        }
+  <div class="max-w-3xl mx-auto px-2">
+    <section class="mb-6">
+      <Link
+        class="block text-[var(--accent)] hover:underline font-bold mb-2"
+        href={`episodes/season/${season}`}>Tilbake til sesong {season}</Link
+      >
+      <div class="flex flex-col items-center gap-8 mb-2">
+        <Image
+          class="w-full md:w-4/6 rounded-2xl"
+          width={300}
+          src={data.cover}
+          alt={`Cover for episode ${data.name}`}
+        />
       </div>
-    </div>
-    <p>
-      {data.description}
-    </p>
-  </section>
-  <section>
-    <h2 class="text-lg font-bold text-[var(--accent)]">Flere episoder</h2>
-  </section>
+      <h1 class="text-3xl font-bold text-[var(--accent)] mb-4">
+        {data.name}
+      </h1>
+      <div>
+        <div style={{ color: data.accentColor }} class="font-semibold mb-4">
+          <span class="bg-black/10 rounded-full px-2 mr-2"
+            >S{season} • E{episodeNr}</span
+          >
+
+          Varighet: <span class="font-normal">{data.length}</span>
+          {
+            !isUpcoming && (
+              <>
+                • Utgitt:{" "}
+                <span class="font-normal">{formattedPublishDate}</span>
+              </>
+            )
+          }
+        </div>
+      </div>
+      <p>
+        {data.description}
+      </p>
+    </section>
+    <section>
+      <h2 class="text-lg font-bold text-[var(--accent)]">Flere episoder</h2>
+    </section>
+  </div>
 </BaseLayout>

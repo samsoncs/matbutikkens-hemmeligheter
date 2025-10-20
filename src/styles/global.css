@@ -21,9 +21,6 @@ h6 {
   .is-scrolled#site-nav {
     @apply bg-gradient-to-br from-[var(--bg-from)]/95 to-[var(--bg-to)]/95 backdrop-blur shadow-md/5;
   }
-  #mobile-drawer {
-    @apply bg-gradient-to-br from-[var(--bg-from)]/95 to-[var(--bg-to)]/95 backdrop-blur shadow-md/5;
-  }
 }
 
 ::view-transition-old(root),

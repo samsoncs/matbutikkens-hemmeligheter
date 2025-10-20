@@ -49,13 +49,33 @@ const formattedPublishDate = format(data.published, "dd.MM.yyyy");
   bgTo={data.toColor}
   accent={data.accentColor}
   title={data.name}
+  noMaxWidth
 >
+  <nav class="max-w-6xl mx-auto px-2 md:pt-2 md:pb-2">
+    <div class="inline-block">
+      <Link
+        class="flex items-center gap-2 text-[var(--accent)] hover:underline font-bold mb-2"
+        href={`episodes/season/${season}`}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="3"
+          stroke="currentColor"
+          class="size-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        Tilbake til sesong {season}
+      </Link>
+    </div>
+  </nav>
   <div class="max-w-3xl mx-auto px-2">
     <section class="mb-6">
-      <Link
-        class="block text-[var(--accent)] hover:underline font-bold mb-2"
-        href={`episodes/season/${season}`}>Tilbake til sesong {season}</Link
-      >
       <div class="flex flex-col items-center gap-8 mb-2">
         <Image
           class="w-full md:w-4/6 rounded-2xl"
@@ -64,12 +84,12 @@ const formattedPublishDate = format(data.published, "dd.MM.yyyy");
           alt={`Cover for episode ${data.name}`}
         />
       </div>
-      <h1 class="text-3xl font-bold text-[var(--accent)] mb-4">
+      <h1 class="md:pt-4 text-3xl font-bold text-[var(--accent)] mb-2">
         {data.name}
       </h1>
-      <div>
+      <div class="">
         <div style={{ color: data.accentColor }} class="font-semibold mb-4">
-          <span class="bg-black/10 rounded-full px-2 mr-2"
+          <span class="bg-gray-200 rounded-full px-2 mr-2"
             >S{season} • E{episodeNr}</span
           >
 
@@ -88,78 +108,104 @@ const formattedPublishDate = format(data.published, "dd.MM.yyyy");
         {data.description}
       </p>
     </section>
-    <section class="flex flex-col gap-4">
-      <h2 class="text-lg font-bold text-[var(--accent)]">Flere episoder</h2>
-      <div class="grid grid-cols-2 gap-2">
-        {
-          prevEpisode && (
-            <Link
-              href={`episodes/season/${season}/${prevEpisode.meta.episode}`}
-            >
-              <div class="bg-linear-to-t from-emerald-50/50 to-emerald-50/50 rounded-full overflow-hidden shadow-sm">
-                <div class="flex items-center gap-2">
-                  <div class="grow pl-4">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="size-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M15.75 19.5 8.25 12l7.5-7.5"
-                      />
-                    </svg>
-                  </div>
-                  <Image
-                    class="h-18"
-                    src={prevEpisode.data.cover}
-                    alt={`Cover for episode ${prevEpisode.data.name}`}
-                  />
-                </div>
-              </div>
-            </Link>
-          )
-        }
-        {!prevEpisode && <div aria-hidden="true" />}
-        {
-          nextEpisode && (
-            <Link
-              href={`episodes/season/${season}/${nextEpisode.meta.episode}`}
-            >
-              <div class="bg-white rounded-full overflow-hidden">
-                <div class="flex items-center gap-2">
-                  <Image
-                    class="h-18"
-                    src={nextEpisode.data.cover}
-                    alt={`Cover for episode ${nextEpisode.data.name}`}
-                  />
-                  <div class="pr-4">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="size-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          )
-        }
-        {!nextEpisode && <div aria-hidden="true" />}
-      </div>
-    </section>
   </div>
+  <section class="max-w-3xl mx-auto flex flex-col gap-4 px-2">
+    <div class="bg-black/5 p-4 grow rounded-2xl">
+      <h2 class="text-lg font-bold text-[var(--accent)] mb-3">
+        Flere episoder
+      </h2>
+      <div class="grid grid-cols-2">
+        <div>
+          {
+            prevEpisode && (
+              <Link
+                href={`episodes/season/${season}/${prevEpisode.meta.episode}`}
+              >
+                <div class="bg-gray-100 rounded-full overflow-hidden shadow-sm">
+                  <div class="flex items-center gap-2">
+                    <div class="grow md:grow-0 pl-4">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="3"
+                        stroke="var(--accent)"
+                        class="size-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M15.75 19.5 8.25 12l7.5-7.5"
+                        />
+                      </svg>
+                    </div>
+                    <div class="pl-2 text-[var(--accent)] md:grow hidden md:block flex justify-center">
+                      <p class="font-bold">{prevEpisode.data.name}</p>
+                      <div class="text-sm bg-gray-200 rounded-full px-2 inline-block">
+                        S{prevEpisode.meta.season} • E
+                        {prevEpisode.meta.episode.split("-")[1]}
+                      </div>
+                    </div>
+                    <div>
+                      <Image
+                        width={110}
+                        src={prevEpisode.data.cover}
+                        alt={`Cover for episode ${prevEpisode.data.name}`}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            )
+          }
+        </div>
+        <div>
+          {!prevEpisode && <div aria-hidden="true" />}
+          {
+            nextEpisode && (
+              <Link
+                href={`episodes/season/${season}/${nextEpisode.meta.episode}`}
+              >
+                <div class="bg-gray-100 rounded-full overflow-hidden shadow-sm">
+                  <div class="flex items-center gap-2">
+                    <div class="grow md:grow-0">
+                      <Image
+                        width={110}
+                        src={nextEpisode.data.cover}
+                        alt={`Cover for episode ${nextEpisode.data.name}`}
+                      />
+                    </div>
+                    <div class="pl-2 text-[var(--accent)] md:grow hidden md:block flex justify-center">
+                      <p class="font-bold">{nextEpisode.data.name}</p>
+                      <div class="text-sm bg-gray-200 rounded-full px-2 inline-block">
+                        S{nextEpisode.meta.season} • E
+                        {nextEpisode.meta.episode.split("-")[1]}
+                      </div>
+                    </div>
+                    <div class="pr-4">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="3"
+                        stroke="var(--accent)"
+                        class="size-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            )
+          }
+          {!nextEpisode && <div aria-hidden="true" />}
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

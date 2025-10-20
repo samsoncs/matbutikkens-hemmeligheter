@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 import { GetEpisodeDataBySlug } from "../../../../lib/getEpisodeDataBySlug";
 import { format, isAfter } from "date-fns";
 import Link from "../../../../lib/common/Link.astro";
+import Card from "../../../../lib/common/Card.astro";
 
 export async function getStaticPaths() {
   const episodes = await getCollection("episodes");
@@ -13,10 +14,16 @@ export async function getStaticPaths() {
     GetEpisodeDataBySlug(episodes, e.id),
   );
 
-  return sortedEpisodes.map((e) => ({
-    params: { season: e.meta.season, episode: e.meta.episode },
-    props: { episode: e },
-  }));
+  return sortedEpisodes.map((e, i) => {
+    const prevEpisode =
+      sortedEpisodes.length > i - 1 ? sortedEpisodes[i - 1] : undefined;
+    const nextEpisode =
+      sortedEpisodes.length >= i + 1 ? sortedEpisodes[i + 1] : undefined;
+    return {
+      params: { season: e.meta.season, episode: e.meta.episode },
+      props: { episode: e, prevEpisode, nextEpisode },
+    };
+  });
 }
 
 const { season } = Astro.params;
@@ -24,6 +31,8 @@ if (!season) throw new Error("Missing season param");
 
 const { episode } = Astro.props;
 if (!episode) throw new Error("Missing episode prop");
+
+const { prevEpisode, nextEpisode } = Astro.props;
 
 const { data } = episode;
 if (!data) throw new Error("Missing episode data");
@@ -79,8 +88,78 @@ const formattedPublishDate = format(data.published, "dd.MM.yyyy");
         {data.description}
       </p>
     </section>
-    <section>
+    <section class="flex flex-col gap-4">
       <h2 class="text-lg font-bold text-[var(--accent)]">Flere episoder</h2>
+      <div class="grid grid-cols-2 gap-2">
+        {
+          prevEpisode && (
+            <Link
+              href={`episodes/season/${season}/${prevEpisode.meta.episode}`}
+            >
+              <div class="bg-linear-to-t from-emerald-50/50 to-emerald-50/50 rounded-full overflow-hidden shadow-sm">
+                <div class="flex items-center gap-2">
+                  <div class="grow pl-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.75 19.5 8.25 12l7.5-7.5"
+                      />
+                    </svg>
+                  </div>
+                  <Image
+                    class="h-18"
+                    src={prevEpisode.data.cover}
+                    alt={`Cover for episode ${prevEpisode.data.name}`}
+                  />
+                </div>
+              </div>
+            </Link>
+          )
+        }
+        {!prevEpisode && <div aria-hidden="true" />}
+        {
+          nextEpisode && (
+            <Link
+              href={`episodes/season/${season}/${nextEpisode.meta.episode}`}
+            >
+              <div class="bg-white rounded-full overflow-hidden">
+                <div class="flex items-center gap-2">
+                  <Image
+                    class="h-18"
+                    src={nextEpisode.data.cover}
+                    alt={`Cover for episode ${nextEpisode.data.name}`}
+                  />
+                  <div class="pr-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          )
+        }
+        {!nextEpisode && <div aria-hidden="true" />}
+      </div>
     </section>
   </div>
 </BaseLayout>

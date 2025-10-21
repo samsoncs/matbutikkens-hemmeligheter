@@ -1,16 +1,18 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-
 import tailwindcss from "@tailwindcss/vite";
 
-// https://astro.build/config
-const isCI = process.env.GITHUB_ACTIONS === "true";
-const isProd = process.env.NODE_ENV === "production";
+const isCF = process.env.CF_PAGES === "1" || !!process.env.CF_PAGES_URL;
+const cfEnv = process.env.CF_PAGES_ENV;
+const siteName = "https://brobert.no";
+
+const site = !isCF
+  ? "http://localhost:4321"
+  : cfEnv === "production"
+    ? siteName
+    : process.env.CF_PAGES_URL || siteName;
 
 export default defineConfig({
-  site: "https://samsoncs.github.io/matbutikkens-hemmeligheter/",
-  base: isCI || isProd ? "/matbutikkens-hemmeligheter/" : undefined,
-  vite: {
-    plugins: [tailwindcss()],
-  },
+  site,
+  vite: { plugins: [tailwindcss()] },
 });

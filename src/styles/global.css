@@ -19,7 +19,7 @@ h6 {
 
 @layer components {
   .is-scrolled#site-nav {
-    @apply bg-gradient-to-br from-[var(--bg-from)]/95 to-[var(--bg-to)]/95 backdrop-blur shadow-md/5;
+    @apply bg-[var(--bg-from)]/95 bg-gradient-to-br from-[var(--bg-from)]/95 to-[var(--bg-to)]/95 backdrop-blur shadow-md/5;
   }
 }
 

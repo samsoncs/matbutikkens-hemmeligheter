@@ -1,31 +1,27 @@
 ---
 import { Image } from "astro:assets";
-import { format, differenceInCalendarDays, isAfter } from "date-fns";
+import { format } from "date-fns";
 import Link from "./Link.astro";
+import type { Episode } from "./episodes/types";
+import { isEpisodePublished, getUpcomingLabel } from "./episodes/episodes";
 
 interface Props {
-  season: number;
-  name: string;
-  published: string;
-  length: string;
-  image: ImageMetadata;
-  description: string;
-  id: string;
-  background: string;
-  accent: string;
+  episode: Episode;
   isCurrent?: boolean;
 }
 
 const {
-  season,
-  name,
-  published,
-  length,
-  image,
-  description,
-  id,
-  background,
-  accent,
+  episode,
+  episode: {
+    id,
+    season,
+    name,
+    length,
+    cover: image,
+    shortDescription,
+    fromColor: background,
+    accentColor: accent,
+  },
   isCurrent,
 } = Astro.props;
 
@@ -38,30 +34,15 @@ function oklchWithAlpha(color: string, alpha = 0.55) {
     return `oklch(${trimmed} / ${alpha})`;
   });
 }
-
-function parseLocalDate(isoDate: string) {
-  return new Date(`${isoDate}T00:00:00`);
-}
-const pub = parseLocalDate(published);
-const today = new Date();
-const diffDays = differenceInCalendarDays(pub, today);
-const isUpcoming = isAfter(pub, today);
-let upcomingLabel: string | null = null;
-if (isUpcoming) {
-  if (diffDays > 30) {
-    upcomingLabel = `Kommer: ${format(pub, "dd.MM.yyyy")}`;
-  } else if (diffDays > 0) {
-    upcomingLabel = `Kommer om ${diffDays} ${diffDays === 1 ? "dag" : "dager"}`;
-  }
-}
+const isUpcoming = !isEpisodePublished(episode);
+let upcomingLabel = getUpcomingLabel(episode);
 
 const translucentBg = isUpcoming
   ? oklchWithAlpha("oklch(70.7% 0.022 261.325)", 0.25)
   : oklchWithAlpha(background, 0.4);
 
 const accentColor = isUpcoming ? "oklch(37.3% 0.034 259.733)" : accent;
-
-const formattedPublishDate = format(pub, "dd.MM.yyyy");
+const formattedPublishDate = format(episode.published, "dd.MM.yyyy");
 ---
 
 <div
@@ -132,7 +113,7 @@ const formattedPublishDate = format(pub, "dd.MM.yyyy");
       }
     </div>
     <p class="text-base leading-5 mb-6">
-      {description}
+      {shortDescription}
     </p>
     <div>
       {

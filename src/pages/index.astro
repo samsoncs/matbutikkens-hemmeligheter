@@ -3,31 +3,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Episode from "../lib/common/Episode.astro";
 import { Image } from "astro:assets";
 import brobert from "../assets/brobert.png";
-import { getCollection } from "astro:content";
 import { isAfter } from "date-fns";
-import { GetEpisodeDataBySlug } from "../lib/getEpisodeDataBySlug";
 import Link from "../lib/common/Link.astro";
 import Card from "../lib/common/Card.astro";
-const episodes = await getCollection("episodes");
+import {
+  getAllEpisodes,
+  isEpisodePublished,
+  getAllSeasons,
+} from "../lib/common/episodes/episodes";
 
-const sortedEpisodes = episodes
-  .map((e) => GetEpisodeDataBySlug(episodes, e.id))
-  .sort((a, b) => (a.data.published < b.data.published ? 1 : -1));
-
-const seasons = Array.from(new Set(sortedEpisodes.map((ep) => ep.meta.season)));
+const episodes = getAllEpisodes();
+const seasons = getAllSeasons();
 const lastSeason = Math.max(...seasons);
 
 const now = new Date();
-const publishedEpisodes = sortedEpisodes.filter(
-  (e) => !isAfter(new Date(e.data.published), now),
-);
-const upcomingEpisodes = sortedEpisodes
-  .filter((e) => isAfter(new Date(e.data.published), now))
-  .sort(
-    (a, b) =>
-      new Date(a.data.published).getTime() -
-      new Date(b.data.published).getTime(),
-  );
+const publishedEpisodes = episodes.filter((e) => isEpisodePublished(e));
+const upcomingEpisodes = episodes.filter((e) => !isEpisodePublished(e));
 const previewEpisodes = [...publishedEpisodes, ...upcomingEpisodes].slice(0, 3);
 const firstTwoEpisodes = previewEpisodes.slice(0, 2);
 const thirdEpisode = previewEpisodes[2];
@@ -54,7 +45,7 @@ const thirdEpisode = previewEpisodes[2];
           </h1>
           <p class="text-lg font-semibold text-emerald-950/80">
             Matbutikkens Hemmeligheter er en spennende og lærerik podkast for
-            barn fra 2-5 år, med fokus på matglede, vennskap og samarbeid. Med
+            barn fra 3-7 år, med fokus på matglede, vennskap og samarbeid. Med
             masse humor, fantasi, fengende musikk og lydefekter.
           </p>
           <div class="flex flex-col gap-4 items-start pt-6">
@@ -100,19 +91,8 @@ const thirdEpisode = previewEpisodes[2];
       <div class="mb-8">
         <div class="grid gap-8 auto-rows-max content-start">
           {
-            firstTwoEpisodes.map(({ meta, data }, i) => (
-              <Episode
-                isCurrent={i === 0}
-                season={meta.season}
-                name={data.name}
-                published={data.published}
-                length={data.length}
-                image={data.cover}
-                description={data.description}
-                id={meta.episode}
-                background={data.fromColor}
-                accent={data.accentColor}
-              />
+            firstTwoEpisodes.map((episode, i) => (
+              <Episode isCurrent={i === 0} episode={episode} />
             ))
           }
         </div>
@@ -123,18 +103,7 @@ const thirdEpisode = previewEpisodes[2];
                 class="overflow-hidden max-h-[250px] sm:max-h-[60px] [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)]
   [-webkit-mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)]"
               >
-                <Episode
-                  isCurrent={false}
-                  season={thirdEpisode.meta.season}
-                  name={thirdEpisode.data.name}
-                  published={thirdEpisode.data.published}
-                  length={thirdEpisode.data.length}
-                  image={thirdEpisode.data.cover}
-                  description={thirdEpisode.data.description}
-                  id={thirdEpisode.meta.episode}
-                  background={thirdEpisode.data.fromColor}
-                  accent={thirdEpisode.data.accentColor}
-                />
+                <Episode isCurrent={false} episode={thirdEpisode} />
               </div>
             </div>
           )

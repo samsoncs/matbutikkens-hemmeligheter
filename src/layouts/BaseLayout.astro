@@ -21,7 +21,6 @@ const {
   noMaxWidth = false,
 } = Astro.props;
 
-// We always use the same utility classes; custom colors flow through CSS vars.
 const bodyGradientClasses =
   bgFrom && bgTo
     ? "bg-[var(--bg-from)] bg-gradient-to-br from-[var(--bg-from)] to-[var(--bg-to)]"
@@ -43,7 +42,7 @@ const bodyGradientClasses =
   >
     <Navbar />
     <article
-      class={`min-h-screen ${noMaxWidth ? "" : "px-2 md:px-4 mx-auto max-w-6xl "}`}
+      class={`pb-6 ${noMaxWidth ? "" : "px-2 md:px-4 mx-auto max-w-6xl "}`}
     >
       <slot />
     </article>

@@ -1,11 +1,8 @@
 ---
-import { getCollection } from "astro:content";
-import { GetEpisodeDataBySlug } from "../../../lib/getEpisodeDataBySlug";
 import Link from "../../../lib/common/Link.astro";
+import { getAllSeasons } from "../../../lib/common/episodes/episodes";
 
-const episodes = await getCollection("episodes");
-const eps = episodes.map((e) => GetEpisodeDataBySlug(episodes, e.id));
-const seasons = Array.from(new Set(eps.map((ep) => ep.meta.season)));
+const seasons = getAllSeasons();
 const lastSeason = Math.max(...seasons);
 ---
 

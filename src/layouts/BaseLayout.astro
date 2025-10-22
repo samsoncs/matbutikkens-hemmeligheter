@@ -24,8 +24,8 @@ const {
 // We always use the same utility classes; custom colors flow through CSS vars.
 const bodyGradientClasses =
   bgFrom && bgTo
-    ? "bg-gradient-to-br from-[var(--bg-from)] to-[var(--bg-to)]"
-    : "bg-gradient-to-br from-emerald-50 via-lime-50 to-rose-50";
+    ? "bg-[var(--bg-from)] bg-gradient-to-br from-[var(--bg-from)] to-[var(--bg-to)]"
+    : "bg-emerald-50 -gradient-to-br from-emerald-50 via-lime-50 to-rose-50";
 ---
 
 <html lang="no">

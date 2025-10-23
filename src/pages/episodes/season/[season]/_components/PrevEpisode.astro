@@ -7,24 +7,26 @@ import { Image } from "astro:assets";
 
 interface Props {
   episode: Episode;
-  originEpisode: Episode;
 }
 
-const { episode, originEpisode } = Astro.props;
+const { episode } = Astro.props;
 ---
 
 <Link href={`episodes/season/${episode.season}/${episode.id}`}>
   <div
-    style={{ background: originEpisode.fromColor }}
+    style={{ background: episode.fromColor }}
     class="bg-gray-100 rounded-full overflow-hidden shadow-sm"
   >
     <div class="flex items-center gap-2">
-      <div class="grow md:grow-0 pl-4">
-        <ChevronLeftIcon className="size-6" stroke="var(--accent)" />
+      <div class="grow pl-4 flex items-center">
+        <ChevronLeftIcon className="size-6" stroke={episode.accentColor} />
+
         <div
           class="pl-2 text-[var(--accent)] md:grow hidden md:block flex justify-center"
         >
-          <p class="font-bold">{episode.name}</p>
+          <p style={{ color: episode.accentColor }} class="font-bold">
+            {episode.name}
+          </p>
           <EpisodeIdentifier episode={episode} />
         </div>
       </div>

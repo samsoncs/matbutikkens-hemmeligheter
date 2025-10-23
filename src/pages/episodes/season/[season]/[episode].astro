@@ -76,19 +76,11 @@ const { episode, prevEpisode, nextEpisode } = Astro.props;
         </h2>
         <div class="grid grid-cols-2">
           <div>
-            {
-              prevEpisode && (
-                <PrevEpisode originEpisode={episode} episode={prevEpisode} />
-              )
-            }
+            {prevEpisode && <PrevEpisode episode={prevEpisode} />}
           </div>
           <div>
             {!prevEpisode && <div aria-hidden="true" />}
-            {
-              nextEpisode && (
-                <NextEpisode originEpisode={episode} episode={nextEpisode} />
-              )
-            }
+            {nextEpisode && <NextEpisode episode={nextEpisode} />}
             {!nextEpisode && <div aria-hidden="true" />}
           </div>
         </div>

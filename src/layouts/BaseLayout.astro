@@ -1,25 +1,44 @@
 ---
 import "../styles/global.css";
-import "@fontsource/fredoka/700";
 import "@fontsource/fredoka/500";
+import openSansWoff2 from "@fontsource-variable/open-sans/files/open-sans-latin-wght-normal.woff2?url";
 import { ClientRouter } from "astro:transitions";
 import Navbar from "./_components/Navbar.astro";
 
 interface Props {
   title: string;
+  description?: string;
   bgFrom?: string;
   bgTo?: string;
   accent?: string;
   noMaxWidth?: boolean;
+  image?: ImageMetadata;
 }
 
 const {
   title,
+  description = "Matbutikkens Hemmeligheter er en spennende og lærerik podkast for barn fra 3-7 år, med fokus på matglede, vennskap og samarbeid. Med masse humor, fantasi, fengende musikk og lydefekter.",
   bgFrom = "oklch(98.6% 0.031 120.757)",
   bgTo = "oklch(96.9% 0.015 12.422)",
   accent = "oklch(50.8% 0.118 165.612)",
   noMaxWidth = false,
+  image,
 } = Astro.props;
+
+const SITE = {
+  url: "https://brobert.no",
+  name: "Matbutikkens Hemmeligheter",
+  author: "Matbutikkens Hemmeligheter",
+  logo: "https://brobert.no/logo.png",
+};
+
+const pathname = Astro.url.pathname;
+const canonicalUrl =
+  pathname === "/"
+    ? SITE.url + "/" // keep single trailing slash on root
+    : SITE.url + pathname.replace(/\/+$/, ""); // strip all trailing slashes
+
+const ogImageUrl: string | undefined = image ? SITE.url + image.src : undefined;
 
 const bodyGradientClasses =
   bgFrom && bgTo
@@ -31,6 +50,33 @@ const bodyGradientClasses =
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | Matbutikkens Hemmeligheter</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#FFFEFB" />
+    <meta name="author" content={SITE.author} />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="nb_NO" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <link
+      rel="preload"
+      href="/fonts/fredoka-latin-500-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
     <ClientRouter />
   </head>
   <body

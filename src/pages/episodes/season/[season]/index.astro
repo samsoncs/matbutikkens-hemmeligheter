@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
-import Episode from "../../../../lib/common/Episode.astro";
+import EpisodeCard from "../../../../lib/common/episodes/EpisodeCard.astro";
 import {
   getAllSeasons,
   getSeasonEpisodes,
@@ -28,7 +28,8 @@ const newestPublishedInSeason = [...episodes]
 ---
 
 <BaseLayout
-  title="Episoder"
+  title={`Episoder - Sesong ${currentSeason}`}
+  description={`Episoder i sesong ${currentSeason} av Matbutikkens Hemmeligheter`}
   bgFrom="oklch(98.6% 0.031 120.757)"
   bgTo="oklch(96.9% 0.015 12.422)"
   accent="oklch(59.6% 0.145 163.225)"
@@ -50,7 +51,7 @@ const newestPublishedInSeason = [...episodes]
     <div class="flex flex-col gap-8 mb-8">
       {
         episodes.map((episode) => (
-          <Episode
+          <EpisodeCard
             isCurrent={newestPublishedInSeason?.id === episode.id}
             episode={episode}
           />

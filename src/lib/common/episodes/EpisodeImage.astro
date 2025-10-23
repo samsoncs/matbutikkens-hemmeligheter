@@ -1,0 +1,59 @@
+---
+import {
+  isEpisodePublished,
+  getUpcomingLabel,
+  getAccentColor,
+} from "./episodes";
+import type { Episode } from "./types";
+import { Image } from "astro:assets";
+
+interface Props {
+  episode: Episode;
+  isCurrent?: boolean;
+  size?: { width: number; height: number };
+}
+
+const { episode, isCurrent, size } = Astro.props;
+
+const isUpcoming = !isEpisodePublished(episode);
+let upcomingLabel = getUpcomingLabel(episode);
+const accentColor = getAccentColor(episode);
+---
+
+<div
+  class="relative col-span-4 md:col-span-3 flex justify-center rounded-xl overflow-hidden"
+>
+  <Image
+    class={`inset-0 w-full h-40 sm:h-full object-cover transition-opacity duration-300 ${
+      isUpcoming ? "opacity-60" : ""
+    }`}
+    src={episode.cover}
+    width={size?.width || 300}
+    height={size?.height || 300}
+    alt={`Illustrasjon for episoden ${episode.name}`}
+  />
+  {
+    upcomingLabel && (
+      <>
+        <div class="absolute inset-0 bg-black/55 backdrop-blur-[1px]" />
+        <span
+          class={`absolute top-4 left-5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide text-white shadow-lg shadow-black/20`}
+          style={{ background: "oklch(21% 0.034 264.665)" }}
+        >
+          🕒 {upcomingLabel}
+        </span>
+      </>
+    )
+  }
+  {
+    isCurrent && (
+      <span
+        aria-label="Ny episode"
+        class={`absolute top-4 left-5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide text-white shadow-lg shadow-black/20`}
+        style={{ background: accentColor }}
+      >
+        Ny
+      </span>
+    )
+  }
+</div>

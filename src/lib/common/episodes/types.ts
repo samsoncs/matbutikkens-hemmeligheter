@@ -4,7 +4,6 @@ export interface Episode {
   length: string;
   cover: ImageMetadata;
   description: string;
-  shortDescription: string;
   fromColor: string;
   toColor: string;
   accentColor: string;

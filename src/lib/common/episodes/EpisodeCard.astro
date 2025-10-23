@@ -1,0 +1,83 @@
+---
+import { format } from "date-fns";
+import Link from "../Link.astro";
+import type { Episode } from "./types";
+import { getAccentColor, isEpisodePublished, oklchWithAlpha } from "./episodes";
+import EpisodeImage from "./EpisodeImage.astro";
+import EpisodeIdentifier from "./EpisodeIdentifier.astro";
+import EpisodeKeyStats from "./EpisodeKeyStats.astro";
+
+interface Props {
+  episode: Episode;
+  isCurrent?: boolean;
+}
+
+const {
+  episode,
+  episode: {
+    id,
+    season,
+    name,
+    length,
+    cover: image,
+    description,
+    fromColor: background,
+    accentColor: accent,
+  },
+  isCurrent,
+} = Astro.props;
+
+const isUpcoming = !isEpisodePublished(episode);
+
+const translucentBg = isUpcoming
+  ? oklchWithAlpha("oklch(70.7% 0.022 261.325)", 0.25)
+  : oklchWithAlpha(background, 0.4);
+
+const accentColor = getAccentColor(episode);
+---
+
+<div
+  class="overflow-hidden bg-white rounded-4xl shadow-xl shadow-emerald-800/5 flex flex-col sm:grid sm:grid-cols-12"
+  style={{
+    border: isCurrent
+      ? `4px solid color-mix(in oklch, ${accentColor} 80%, transparent)`
+      : undefined,
+    boxShadow: isCurrent
+      ? `0 0 15px color-mix(in oklch, ${accentColor} 50%, transparent)`
+      : undefined,
+  }}
+>
+  <EpisodeImage episode={episode} isCurrent={isCurrent} />
+
+  <div
+    class="p-6 sm:py-6 sm:px-8 col-span-8 md:col-span-9 xl:pr-12"
+    style={{ background: translucentBg }}
+  >
+    <div class="flex items-center gap-3">
+      <EpisodeIdentifier applyUpcomingStyles episode={episode} />
+      <h3
+        style={{ color: accentColor }}
+        class={`text-xl ${isUpcoming ? "font-normal" : "font-bold"}`}
+      >
+        {name}
+      </h3>
+    </div>
+    <EpisodeKeyStats episode={episode} />
+    <p class="text-base leading-5 mb-6 mt-3">
+      {description}
+    </p>
+    <div>
+      {
+        (
+          <Link
+            href={`episodes/season/${season}/${id}`}
+            class="font-semibold text-white px-4 py-2 rounded-full hover:brightness-110 transition"
+            style={{ background: accentColor }}
+          >
+            {!isUpcoming ? "Hør nå" : "Kommer snart"}
+          </Link>
+        )
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+---
+import { format } from "date-fns";
+import { getAccentColor, isEpisodePublished } from "./episodes";
+import type { Episode } from "./types";
+
+interface Props {
+  episode: Episode;
+}
+
+const { episode } = Astro.props;
+
+const accentColor = getAccentColor(episode);
+const isUpcoming = !isEpisodePublished(episode);
+const formattedPublishDate = format(episode.published, "dd.MM.yyyy");
+---
+
+<div style={{ color: accentColor }} class="font-semibold">
+  Varighet: <span class="font-normal">{episode.length}</span>
+  {
+    !isUpcoming && (
+      <>
+        • Utgitt: <span class="font-normal">{formattedPublishDate}</span>
+      </>
+    )
+  }
+</div>

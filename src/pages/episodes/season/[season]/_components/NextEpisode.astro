@@ -1,0 +1,40 @@
+---
+import EpisodeIdentifier from "../../../../../lib/common/episodes/EpisodeIdentifier.astro";
+import type { Episode } from "../../../../../lib/common/episodes/types";
+import ChevronRightIcon from "../../../../../lib/common/icons/ChevronRightIcon.astro";
+import Link from "../../../../../lib/common/Link.astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  episode: Episode;
+  originEpisode: Episode;
+}
+
+const { episode, originEpisode } = Astro.props;
+---
+
+<Link href={`episodes/season/${episode.season}/${episode.id}`}>
+  <div
+    style={{ background: originEpisode.fromColor }}
+    class="bg-gray-100 rounded-full overflow-hidden shadow-sm"
+  >
+    <div class="flex items-center gap-2">
+      <div class="grow md:grow-0">
+        <Image
+          width={110}
+          src={episode.cover}
+          alt={`Cover for episode ${episode.name}`}
+        />
+      </div>
+      <div
+        class="pl-2 text-[var(--accent)] md:grow hidden md:block flex justify-center"
+      >
+        <p class="font-bold">{episode.name}</p>
+        <EpisodeIdentifier episode={episode} />
+      </div>
+      <div class="pr-4">
+        <ChevronRightIcon className="size-6" stroke="var(--accent)" />
+      </div>
+    </div>
+  </div>
+</Link>

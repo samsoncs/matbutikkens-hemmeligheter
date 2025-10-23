@@ -57,3 +57,21 @@ export function getUpcomingLabel(episode: Episode): string | undefined {
   }
   return upcomingLabel;
 }
+
+export function getAccentColor(episode: Episode): string {
+  const isUpcoming = !isEpisodePublished(episode);
+  const accentColor = isUpcoming
+    ? "oklch(37.3% 0.034 259.733)"
+    : episode.accentColor;
+  return accentColor;
+}
+
+export function oklchWithAlpha(color: string, alpha = 0.55) {
+  if (!color) return color;
+  if (!color.startsWith("oklch(")) return color;
+  if (/\/\s*\d*\.?\d+\s*\)/.test(color)) return color;
+  return color.replace(/oklch\(([^)]+)\)/, (_, inner) => {
+    const trimmed = inner.trim();
+    return `oklch(${trimmed} / ${alpha})`;
+  });
+}

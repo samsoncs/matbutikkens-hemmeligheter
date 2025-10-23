@@ -1,9 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Episode from "../lib/common/Episode.astro";
+import EpisodeCard from "../lib/common/episodes/EpisodeCard.astro";
 import { Image } from "astro:assets";
 import brobert from "../assets/brobert.png";
-import { isAfter } from "date-fns";
 import Link from "../lib/common/Link.astro";
 import Card from "../lib/common/Card.astro";
 import {
@@ -11,15 +10,16 @@ import {
   isEpisodePublished,
   getAllSeasons,
 } from "../lib/common/episodes/episodes";
+import type { Episode } from "../lib/common/episodes/types";
 
 const episodes = getAllEpisodes();
 const seasons = getAllSeasons();
 const lastSeason = Math.max(...seasons);
 
-const now = new Date();
 const publishedEpisodes = episodes.filter((e) => isEpisodePublished(e));
 const upcomingEpisodes = episodes.filter((e) => !isEpisodePublished(e));
-const previewEpisodes = [...publishedEpisodes, ...upcomingEpisodes].slice(0, 3);
+const allEpisodes = [...publishedEpisodes, ...upcomingEpisodes];
+const previewEpisodes = allEpisodes.slice(0, 3);
 const firstTwoEpisodes = previewEpisodes.slice(0, 2);
 const thirdEpisode = previewEpisodes[2];
 ---
@@ -92,7 +92,7 @@ const thirdEpisode = previewEpisodes[2];
         <div class="grid gap-8 auto-rows-max content-start">
           {
             firstTwoEpisodes.map((episode, i) => (
-              <Episode isCurrent={i === 0} episode={episode} />
+              <EpisodeCard isCurrent={false} episode={episode} />
             ))
           }
         </div>
@@ -103,7 +103,7 @@ const thirdEpisode = previewEpisodes[2];
                 class="overflow-hidden max-h-[250px] sm:max-h-[60px] [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)]
   [-webkit-mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)]"
               >
-                <Episode isCurrent={false} episode={thirdEpisode} />
+                <EpisodeCard isCurrent={false} episode={thirdEpisode} />
               </div>
             </div>
           )

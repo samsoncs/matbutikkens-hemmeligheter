@@ -14,10 +14,8 @@ const season1: Season = [
     published: "2025-09-18",
     length: "14:51",
     cover: ep1,
-    shortDescription:
-      "Brokkolien brobert er trist for ingen vil spise han. En dag dukker gutten Nils opp i matbutikken.",
     description:
-      "I matbutikken føler brokkolien Brobert seg trist fordi ingen vil kjøpe ham, i motsetning til de populære fruktene og godteriene. Men en dag smaker gutten Nils på ham – og oppdager at han faktisk er kjempegod! Plutselig vil alle ha brokkoli, og Brobert får endelig skinne.",
+      "Brokkolien brobert er trist for ingen vil spise han. En dag dukker gutten Nils opp i matbutikken.",
     fromColor: "oklch(98.2% 0.018 155.826)",
     toColor: "oklch(95% 0.052 163.051)",
     accentColor: "oklch(52.7% 0.154 150.069)",
@@ -30,9 +28,8 @@ const season1: Season = [
     published: "2025-10-15",
     length: "11:51",
     cover: ep2,
-    shortDescription:
-      "Purnille sin store drøm er å bli en snømann-nese, men det er vel bare gullgrøtter som kan bli?",
-    description: "",
+    description:
+      "Purnille sin store drøm er å bli en snømann-nese, men er ikke det bare for gulrøtter?",
     fromColor: "oklch(96.9% 0.016 293.756)",
     toColor: "oklch(96.9% 0.015 12.422)",
     accentColor: "oklch(44.6% 0.043 257.281)",
@@ -45,8 +42,7 @@ const season1: Season = [
     published: "2025-10-17",
     length: "11:49",
     cover: ep3,
-    description: "",
-    shortDescription:
+    description:
       "Bananders er rampete, men en dag går det litt for langt når noen faller og slår seg.",
     fromColor: "oklch(98% 0.016 73.684)",
     toColor: "oklch(98.7% 0.026 102.212)",
@@ -60,9 +56,8 @@ const season1: Season = [
     published: "2025-12-19",
     length: "11:51",
     cover: ep4,
-    description: "",
-    shortDescription:
-      "Eggene elsker å krangle, men hva skjer når kokken kommer på besøk?",
+    description:
+      "Eggene elsker å krangle, men når kokken kommer på besøk lærer de at de kanskje er best sammen.",
     fromColor: "oklch(96.9% 0.016 293.756)",
     toColor: "oklch(98.4% 0.019 200.873)",
     accentColor: "oklch(49.1% 0.27 292.581)",
@@ -75,8 +70,7 @@ const season1: Season = [
     published: "2027-12-19",
     length: "11:11",
     cover: ep5,
-    description: "",
-    shortDescription:
+    description:
       "Brobert skal delta i talentkonkurranse, men blir nervøs når han hører Popcornelia sin vakre stemme.",
     fromColor: "oklch(87% 0.065 274.039)",
     toColor: "oklch(81.1% 0.111 293.571)",

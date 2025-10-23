@@ -1,0 +1,21 @@
+---
+import { getAccentColor, oklchWithAlpha } from "./episodes";
+import type { Episode } from "./types";
+
+interface Props {
+  episode: Episode;
+  applyUpcomingStyles?: boolean;
+}
+
+const { episode, applyUpcomingStyles } = Astro.props;
+const accentColor = applyUpcomingStyles
+  ? getAccentColor(episode)
+  : episode.accentColor;
+const translucentBg = oklchWithAlpha(accentColor, 0.15);
+---
+
+<span
+  style={{ background: translucentBg, color: accentColor }}
+  class=`rounded-full px-2 text-sm font-semibold`
+  >S{episode.season} • E{episode.number}</span
+>

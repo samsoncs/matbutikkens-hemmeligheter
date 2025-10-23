@@ -30,8 +30,9 @@ const { episode, prevEpisode, nextEpisode } = Astro.props;
   bgFrom={episode.fromColor}
   bgTo={episode.toColor}
   accent={episode.accentColor}
-  title={`Episode ${episode.number}, Sesong ${episode.season} - ${episode.name}`}
+  title={`Episode ${episode.number} S${episode.season} - ${episode.name}`}
   description={episode.description}
+  image={episode.cover}
   noMaxWidth
 >
   <nav class="max-w-6xl mx-auto px-2 md:pt-2 md:pb-2">

@@ -1,15 +1,14 @@
 ---
-import BaseLayout from "../../../../layouts/BaseLayout.astro";
-import { Image } from "astro:assets";
-import { format, isAfter } from "date-fns";
-import Link from "../../../../lib/common/Link.astro";
-import { getAllEpisodes } from "../../../../lib/common/episodes/episodes";
-import EpisodeImage from "../../../../lib/common/episodes/EpisodeImage.astro";
-import EpisodeIdentifier from "../../../../lib/common/episodes/EpisodeIdentifier.astro";
-import EpisodeKeyStats from "../../../../lib/common/episodes/EpisodeKeyStats.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Link from "@lib/common/Link.astro";
+import { getAllEpisodes } from "@lib/common/episodes/episodes";
+import EpisodeImage from "@lib/common/episodes/EpisodeImage.astro";
+import EpisodeIdentifier from "@lib/common/episodes/EpisodeIdentifier.astro";
+import EpisodeKeyStats from "@lib/common/episodes/EpisodeKeyStats.astro";
 import PrevEpisode from "./_components/PrevEpisode.astro";
 import NextEpisode from "./_components/NextEpisode.astro";
-import ChevronLeftIcon from "../../../../lib/common/icons/ChevronLeftIcon.astro";
+import ChevronLeftIcon from "@lib/common/icons/ChevronLeftIcon.astro";
+import PodcastBadges from "@lib/common/podcast-badges/PodcastBadges.astro";
 
 export async function getStaticPaths() {
   const episodes = getAllEpisodes();
@@ -53,38 +52,40 @@ const { episode, prevEpisode, nextEpisode } = Astro.props;
           <EpisodeImage episode={episode} size={{ width: 300, height: 300 }} />
         </div>
       </div>
-      <h1 class="md:pt-4 text-3xl font-bold text-[var(--accent)] mb-2">
-        {episode.name}
-      </h1>
-      <div class="">
-        <div
-          style={{ color: episode.accentColor }}
-          class="font-semibold mb-4 flex gap-2 items-center mb-1"
-        >
-          <EpisodeIdentifier episode={episode} />
-          <EpisodeKeyStats episode={episode} />
-        </div>
-        <p>
-          {episode.description}
-        </p>
-      </div>
     </section>
-    <section class="max-w-3xl mx-auto flex flex-col gap-4 px-2">
-      <div class="bg-black/5 p-4 grow rounded-2xl">
-        <h2 class="text-lg font-bold text-[var(--accent)] mb-3">
-          Flere episoder
-        </h2>
-        <div class="grid grid-cols-2">
-          <div>
-            {prevEpisode && <PrevEpisode episode={prevEpisode} />}
-          </div>
-          <div>
-            {!prevEpisode && <div aria-hidden="true" />}
-            {nextEpisode && <NextEpisode episode={nextEpisode} />}
-            {!nextEpisode && <div aria-hidden="true" />}
-          </div>
-        </div>
+    <h1 class="md:pt-4 text-3xl font-bold text-[var(--accent)] mb-2">
+      {episode.name}
+    </h1>
+    <div class="mb-8">
+      <div
+        style={{ color: episode.accentColor }}
+        class="font-semibold flex gap-2 items-center mb-4"
+      >
+        <EpisodeIdentifier episode={episode} />
+        <EpisodeKeyStats episode={episode} />
       </div>
-    </section>
+      <PodcastBadges />
+    </div>
+    <p>
+      {episode.description}
+    </p>
   </div>
+
+  <section class="max-w-3xl mx-auto flex flex-col gap-4 px-2 mt-8">
+    <div class="bg-black/5 p-4 grow rounded-2xl">
+      <h2 class="text-lg font-bold text-[var(--accent)] mb-3">
+        Flere episoder
+      </h2>
+      <div class="grid grid-cols-2">
+        <div>
+          {prevEpisode && <PrevEpisode episode={prevEpisode} />}
+        </div>
+        <div>
+          {!prevEpisode && <div aria-hidden="true" />}
+          {nextEpisode && <NextEpisode episode={nextEpisode} />}
+          {!nextEpisode && <div aria-hidden="true" />}
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

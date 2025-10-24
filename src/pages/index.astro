@@ -102,7 +102,7 @@ const thirdEpisode = previewEpisodes[2];
         </div>
         {
           thirdEpisode && (
-            <div class="relative mt-8">
+            <div class="relative mt-8" aria-hidden="true" inert>
               <div
                 class="overflow-hidden max-h-[250px] sm:max-h-[60px] [mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)]
   [-webkit-mask-image:linear-gradient(to_bottom,black_0%,transparent_100%)]"
@@ -116,7 +116,7 @@ const thirdEpisode = previewEpisodes[2];
       <div class="flex justify-center">
         <Link
           href={`episodes/season/${lastSeason}`}
-          class="bg-rose-500 font-semibold text-white px-5 py-2 rounded-full shadow hover:bg-rose-600 transition"
+          class="bg-rose-600 font-bold text-white px-5 py-2 rounded-full shadow hover:bg-rose-600 transition"
         >
           Alle episoder
         </Link>
@@ -183,7 +183,7 @@ const thirdEpisode = previewEpisodes[2];
             </div>
             <Link
               href="about"
-              class="inline-block bg-rose-500 font-bold text-white px-5 py-2 rounded-full shadow hover:bg-rose-600 transition mt-5"
+              class="inline-block bg-rose-600 font-bold text-white px-5 py-2 rounded-full shadow hover:bg-rose-600 transition mt-5"
             >
               Les mer om oss
             </Link>

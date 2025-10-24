@@ -2,12 +2,23 @@
 import Link from "../../../lib/common/Link.astro";
 import { getAllSeasons } from "../../../lib/common/episodes/episodes";
 
+interface Props {
+  orientation?: "horizontal" | "vertical";
+  classes?: string;
+}
+
+const { orientation, classes } = Astro.props;
+
 const seasons = getAllSeasons();
 const lastSeason = Math.max(...seasons);
 ---
 
-<Link href={`episodes/season/${lastSeason}`} class="hover:underline">
-  Episoder
-</Link>
-<Link href="about" class="hover:underline">Om oss</Link>
-<Link href="" class="hover:underline">Hjem</Link>
+<div
+  class={`flex ${orientation === "vertical" ? "flex-col" : "flex-row"} gap-4 md:gap-5 font-bold text-emerald-800 ${classes ?? ""}`}
+>
+  <Link href={`episodes/season/${lastSeason}`} class="hover:underline">
+    Episoder
+  </Link>
+  <Link href="about" class="hover:underline">Om oss</Link>
+  <Link href="" class="hover:underline">Hjem</Link>
+</div>

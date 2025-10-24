@@ -11,7 +11,7 @@ const { episode, applyUpcomingStyles } = Astro.props;
 const accentColor = applyUpcomingStyles
   ? getAccentColor(episode)
   : episode.accentColor;
-const translucentBg = oklchWithAlpha(accentColor, 0.15);
+const translucentBg = oklchWithAlpha(accentColor, 0.08);
 ---
 
 <span

@@ -18,7 +18,7 @@ const season1: Season = [
       "Brokkolien brobert er trist for ingen vil spise han. En dag dukker gutten Nils opp i matbutikken.",
     fromColor: "oklch(98.2% 0.018 155.826)",
     toColor: "oklch(95% 0.052 163.051)",
-    accentColor: "oklch(52.7% 0.154 150.069)",
+    accentColor: "oklch(50.8% 0.118 165.612)",
   },
   {
     name: "Purren Purnille",

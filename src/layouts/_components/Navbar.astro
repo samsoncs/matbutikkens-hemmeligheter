@@ -1,15 +1,14 @@
 ---
 import Link from "../../lib/common/Link.astro";
 import CrossIcon from "./Navbar/CrossIcon.astro";
-import DesktopLinks from "./Navbar/DesktopLinks.astro";
 import HamburgerIcon from "./Navbar/HamburgerIcon.astro";
 import Logo from "./Navbar/Logo.astro";
-import MobileLinks from "./Navbar/MobileLinks.astro";
+import MenuLinks from "./Navbar/MenuLinks.astro";
 ---
 
 <nav
   id="site-nav"
-  class={`sticky top-0 z-30 text-[var(--accent)]  mb-2 transition-all duration-100 ease-in-out`}
+  class={`sticky top-0 z-30 text-[var(--accent)] mb-2 transition-all duration-100 ease-in-out`}
 >
   <div class="flex items-center mx-auto max-w-6xl p-4 font-bold relative">
     <div class="flex-grow">
@@ -20,23 +19,23 @@ import MobileLinks from "./Navbar/MobileLinks.astro";
         </Link>
       </h3>
     </div>
-    <DesktopLinks />
-    <div class="sm:hidden">
-      <label
-        for="nav-toggle"
-        class="flex flex-col justify-center gap-1 cursor-pointer"
-        aria-label="Open menu"
+    <MenuLinks orientation="horizontal" classes="hidden md:flex" />
+    <div class="md:hidden">
+      <button
+        id="nav-toggle-hamburger"
+        class="text-emerald-800 cursor-pointer"
+        aria-label="Åpne meny"
         aria-controls="mobile-drawer"
         aria-expanded="false"
       >
         <HamburgerIcon />
-      </label>
+      </button>
     </div>
   </div>
 </nav>
-<input id="nav-toggle" type="checkbox" class="peer hidden" aria-hidden="true" />
 <label
-  for="nav-toggle"
+  id="nav-toggle-drawer-click-target"
+  aria-hidden="true"
   class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity peer-checked:opacity-100 peer-checked:pointer-events-auto"
 ></label>
 <aside
@@ -46,37 +45,75 @@ import MobileLinks from "./Navbar/MobileLinks.astro";
   <div class="flex justify-between items-center">
     <Logo />
 
-    <label
-      for="nav-toggle"
+    <button
+      id="nav-toggle-close"
       class="cursor-pointer text-emerald-800"
-      aria-label="Close menu"
+      aria-label="Lukk meny"
+      aria-controls="mobile-drawer"
+      aria-expanded="false"
     >
       <CrossIcon />
-    </label>
+    </button>
   </div>
-  <MobileLinks />
+  <MenuLinks orientation="vertical" classes="flex md:hidden" />
 </aside>
 <script>
-  const toggle = document.getElementById(
-    "nav-toggle",
-  ) as HTMLInputElement | null;
-  const trigger = document.querySelector(
-    'label[for="nav-toggle"][aria-controls="mobile-drawer"]',
-  );
-  const body = document.documentElement;
-  if (toggle && trigger) {
-    const sync = () => {
-      const open = toggle.checked;
-      trigger.setAttribute("aria-expanded", String(open));
-      body.classList.toggle("overflow-hidden", open);
-    };
-    toggle.addEventListener("change", sync);
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && toggle.checked) {
-        toggle.checked = false;
-        toggle.dispatchEvent(new Event("change"));
+  function initNavbar() {
+    const drawer = document.getElementById("mobile-drawer");
+    const hamburger = document.getElementById("nav-toggle-hamburger");
+    const closeButton = document.getElementById("nav-toggle-close");
+    const closeClickTarget = document.getElementById(
+      "nav-toggle-drawer-click-target",
+    );
+
+    if (!drawer || !hamburger || !closeButton || !closeClickTarget) return;
+    if (hamburger.dataset.navInit === "true") return; // prevent duplicate bindings
+    hamburger.dataset.navInit = "true";
+
+    function escListener(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        const isOpen = hamburger!.getAttribute("aria-expanded") === "true";
+        if (isOpen) toggleMenu();
       }
-    });
-    sync();
+    }
+
+    function setState(next: boolean) {
+      hamburger!.setAttribute("aria-expanded", next ? "true" : "false");
+      closeButton!.setAttribute("aria-expanded", next ? "true" : "false");
+      hamburger!.setAttribute("aria-label", next ? "Lukk meny" : "Åpne meny");
+      closeButton!.setAttribute("aria-label", next ? "Lukk meny" : "Åpne meny");
+
+      drawer!.classList.toggle("translate-x-full", !next);
+      drawer!.classList.toggle("translate-x-0", next);
+
+      closeClickTarget!.classList.toggle("opacity-0", !next);
+      closeClickTarget!.classList.toggle("opacity-100", next);
+      closeClickTarget!.classList.toggle("pointer-events-none", !next);
+      closeClickTarget!.classList.toggle("pointer-events-auto", next);
+
+      if (next) {
+        const firstLink = drawer!.querySelector("a");
+        firstLink && firstLink.focus();
+        document.addEventListener("keydown", escListener);
+      } else {
+        document.removeEventListener("keydown", escListener);
+        hamburger!.focus();
+      }
+    }
+
+    function toggleMenu() {
+      const isOpen = hamburger!.getAttribute("aria-expanded") === "true";
+      setState(!isOpen);
+    }
+
+    setState(false);
+
+    hamburger.addEventListener("click", toggleMenu);
+    closeButton.addEventListener("click", toggleMenu);
+    closeClickTarget.addEventListener("click", toggleMenu);
+    document.addEventListener("astro:before-swap", () => setState(false));
   }
+
+  document.addEventListener("astro:page-load", initNavbar);
+  document.addEventListener("astro:after-swap", initNavbar);
 </script>

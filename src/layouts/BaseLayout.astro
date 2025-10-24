@@ -93,11 +93,13 @@ const bodyGradientClasses =
     style={bgFrom && bgTo ? `--bg-from:${bgFrom};--bg-to:${bgTo};` : undefined}
   >
     <Navbar />
-    <article
-      class={`pb-6 ${noMaxWidth ? "" : "px-2 md:px-4 mx-auto max-w-6xl "}`}
-    >
-      <slot />
-    </article>
+    <main id="main-content">
+      <article
+        class={`pb-6 ${noMaxWidth ? "" : "px-2 md:px-4 mx-auto max-w-6xl "}`}
+      >
+        <slot />
+      </article>
+    </main>
     <footer class="bg-emerald-900 text-white py-8 px-8">
       <section
         class="flex flex-col items-center justify-center mx-auto max-w-6xl px-2 md:px-4 mb-8"

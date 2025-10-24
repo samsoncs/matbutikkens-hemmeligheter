@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
-import "@fontsource/fredoka/500";
-import openSansWoff2 from "@fontsource-variable/open-sans/files/open-sans-latin-wght-normal.woff2?url";
+import "@fontsource/fredoka/500.css";
+import fredoka500Url from "@fontsource/fredoka/files/fredoka-latin-500-normal.woff2?url";
 import { ClientRouter } from "astro:transitions";
 import Navbar from "./_components/Navbar.astro";
 
@@ -75,7 +75,7 @@ const bodyGradientClasses =
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
     <link
       rel="preload"
-      href="/fonts/fredoka-latin-500-normal.woff2"
+      href={fredoka500Url}
       as="font"
       type="font/woff2"
       crossorigin="anonymous"

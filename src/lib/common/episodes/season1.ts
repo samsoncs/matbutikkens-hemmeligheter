@@ -30,8 +30,8 @@ const season1: Season = [
     cover: ep2,
     description:
       "Purnille sin store drøm er å bli en snømann-nese, men er ikke det bare for gulrøtter?",
-    fromColor: "oklch(96.9% 0.016 293.756)",
-    toColor: "oklch(96.9% 0.015 12.422)",
+    fromColor: "oklch(95.1% 0.026 236.824)",
+    toColor: "oklch(95.6% 0.045 203.388)",
     accentColor: "oklch(44.6% 0.043 257.281)",
   },
   {
@@ -58,9 +58,9 @@ const season1: Season = [
     cover: ep4,
     description:
       "Eggene elsker å krangle, men når kokken kommer på besøk lærer de at de kanskje er best sammen.",
-    fromColor: "oklch(96.9% 0.016 293.756)",
-    toColor: "oklch(98.4% 0.019 200.873)",
-    accentColor: "oklch(49.1% 0.27 292.581)",
+    fromColor: "oklch(94.1% 0.03 12.58)",
+    toColor: "oklch(94.8% 0.028 342.258)",
+    accentColor: "oklch(58.6% 0.253 17.585)",
   },
   {
     name: "Stjernekvelden",

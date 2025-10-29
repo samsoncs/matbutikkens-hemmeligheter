@@ -10,10 +10,11 @@ import { Image } from "astro:assets";
 interface Props {
   episode: Episode;
   isCurrent?: boolean;
+  rounded?: boolean;
   size?: { width: number; height: number };
 }
 
-const { episode, isCurrent, size } = Astro.props;
+const { episode, isCurrent, size, rounded = true } = Astro.props;
 
 const isUpcoming = !isEpisodePublished(episode);
 let upcomingLabel = getUpcomingLabel(episode);
@@ -21,7 +22,9 @@ const accentColor = getAccentColor(episode);
 ---
 
 <div
-  class="relative col-span-4 md:col-span-3 flex justify-center rounded-xl overflow-hidden"
+  class={`relative col-span-4 md:col-span-3 flex justify-center overflow-hidden ${
+    rounded ? "rounded-xl" : ""
+  }`}
 >
   <Image
     class={`inset-0 w-full h-40 sm:h-full object-cover transition-opacity duration-300 ${

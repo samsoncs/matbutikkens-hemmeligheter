@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import EpisodeCard from "../lib/common/episodes/EpisodeCard.astro";
 import { Image } from "astro:assets";
+import purnille from "../assets/purnille.png";
 import brobert from "../assets/brobert.png";
 import Link from "../lib/common/Link.astro";
 import Card from "../lib/common/Card.astro";
@@ -32,11 +33,11 @@ const thirdEpisode = previewEpisodes[2];
 >
   <div class="px-2 md:px-4 flex flex-col gap-8 md:gap-12 pb-8">
     <section
-      class="max-w-6xl mx-auto relative overflow-hidden bg-gradient-to-br from-emerald-100 via-emerald-50/70 to-teal-100/70 rounded-4xl shadow-xl shadow-emerald-800/5"
+      class="max-w-6xl mx-auto relative overflow-hidden bg-gradient-to-br from-emerald-100 via-emerald-50/40 to-teal-100/40 rounded-4xl shadow-xl shadow-emerald-800/5"
     >
       <div class="px-8 md:px-12 py-16 md:py-24 flex flex-col gap-6 md:gap-12">
         <div class="w-9/12 xs:w-10/12 sm:w-3/4 md:w-7/12">
-          <h1 class="text-4xl md:text-5xl leading-tight font-extrabold mb-6">
+          <h1 class="text-4xl/9 md:text-5xl/12 font-extrabold mb-6">
             <span
               class="bg-clip-text text-transparent bg-pink-600 bg-gradient-to-r from-pink-600 to-pink-600"
             >
@@ -69,18 +70,28 @@ const thirdEpisode = previewEpisodes[2];
           </div>
         </div>
         <div
-          class="pointer-events-none select-none absolute lg:right-[-4%] md:right-[-7%] sm:right-[-14%] right-[-34%] bottom-[-20%] sm:bottom-[-24%] md:bottom-[-16%] rotate-6 md:rotate-3 origin-center"
+          class="hidden md:block pointer-events-none select-none absolute md:right-[-4%] sm:right-[-14%] right-[-34%] bottom-[-16%] rotate-6 md:rotate-3 origin-center"
+        >
+          <Image
+            class="rounded-lg hidden md:block z-1"
+            src={purnille}
+            width={370}
+            alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
+          />
+        </div>
+        <div
+          class="pointer-events-none select-none absolute lg:right-[20%] md:right-[25%] right-[-10%] bottom-[-15%] md:bottom-[-16%] rotate-6 md:rotate-3 origin-center"
         >
           <Image
             class="rounded-lg hidden md:block z-1"
             src={brobert}
-            width={650}
+            width={300}
             alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
           />
           <Image
             class="rounded-lg md:hidden block z-1"
             src={brobert}
-            width={550}
+            width={200}
             alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
           />
         </div>

@@ -29,6 +29,7 @@ const thirdEpisode = previewEpisodes[2];
 <BaseLayout
   title="Matbutikkens Hemmeligheter – Barnepodkast for barn 3–7 år"
   description=" Gratis barnepodkast for barn 3–7 år om matglede, vennskap og fantasi – uten reklame."
+  image={brobert}
   noMaxWidth
 >
   <div class="px-2 md:px-4 flex flex-col gap-8 md:gap-12 pb-8">
@@ -51,8 +52,9 @@ const thirdEpisode = previewEpisodes[2];
           </h1>
           <p class="text-lg font-semibold text-emerald-950/80 mb-4">
             Matbutikkens Hemmeligheter er en spennende og lærerik podkast for
-            barn fra 3-7 år, med fokus på matglede, vennskap og samarbeid. Med
-            masse humor, fantasi, fengende musikk og lydefekter.
+            barn i <span class="font-bold"> alderen 3-7 år. </span> Hver episode
+            byr på fantasifulle historier om matvarer som får personlighet og egne
+            små eventyr.
           </p>
         </div>
         <div class="relative z-10">
@@ -154,24 +156,21 @@ const thirdEpisode = previewEpisodes[2];
   <div class="bg-emerald-700 text-white py-8 pb-8 md:px-8">
     <section class="mx-auto max-w-5xl px-4 mb-8">
       <div class="grid md:grid-cols-5">
-        <div class="md:col-span-2 -mt-10 flex flex-col items-center">
+        <div class="md:col-span-2 -mt-10">
           <Image
             class="rounded-lg"
             src={brobert}
-            widths={[200, 300]}
-            sizes="(max-width: 768px) 200px, 300px"
+            widths={[150, 300]}
+            sizes="(max-width: 768px) 150px, 300px"
             alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
           />
-          <p class="hidden md:block text-sm text-emerald-100">
-            Vi lager historier med hjerte, latter og litt grønt på toppen.
-          </p>
         </div>
         <div class="md:col-span-3">
           <Card
             background="bg-emerald-900 bg-linear-to-t from-emerald-900 to-emerald-900/85"
           >
             <h2 class="text-xl md:text-2xl font-bold mb-4 text-rose-200">
-              Bli kjent med oss!
+              En magisk matbutikk!
             </h2>
             <p class="text-base/8">
               Matbutikkens Hemmeligheter er en spennende podkast for barn <span
@@ -195,12 +194,6 @@ const thirdEpisode = previewEpisodes[2];
                 Gratis og uten annonser
               </div>
             </div>
-            <Link
-              href="about"
-              class="inline-block bg-pink-600 font-bold text-white px-5 py-2 rounded-full shadow hover:bg-pink-600 transition mt-5"
-            >
-              Les mer om oss
-            </Link>
           </Card>
         </div>
       </div>

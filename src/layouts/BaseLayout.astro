@@ -4,6 +4,10 @@ import "@fontsource/fredoka/500.css";
 import fredoka500Url from "@fontsource/fredoka/files/fredoka-latin-500-normal.woff2?url";
 import { ClientRouter } from "astro:transitions";
 import Navbar from "./_components/Navbar.astro";
+import { Image } from "astro:assets";
+import instagram from "@assets/Instagram_Glyph_White.svg";
+import facebook from "@assets/Facebook_Logo_Secondary.png";
+import Link from "@lib/common/Link.astro";
 
 interface Props {
   title: string;
@@ -101,37 +105,55 @@ const bodyGradientClasses =
       </article>
     </main>
     <footer class="bg-emerald-900 text-white py-8 px-8">
-      <section
-        class="flex flex-col items-center justify-center mx-auto max-w-6xl px-2 md:px-4 mb-8"
-      >
-        <p>Copyright © 2025 Matbutikkens Hemmeligheter.</p>
+      <section class="mx-auto max-w-6xl px-2 md:px-4 mb-8">
+        <p class="mb-2">Har du spørsmål, kommentarer eller tilbakemeldinger?</p>
+        <p class="mb-2">
+          <a href="mailto:matbutikkenshemmeligheter@gmail.com" class="underline"
+            >Send oss en e-post →</a
+          >
+        </p>
+        <p class="mb-2 font-bold">Følg oss på</p>
+        <p class="mb-6">
+          <Link href="https://www.instagram.com/matbutikkenshemmeligheter/">
+            <Image
+              src={instagram}
+              alt="Matbutikkens Hemmeligheter på Instagram"
+              width={30}
+            />
+
+            <p>Copyright © 2025 Matbutikkens Hemmeligheter.</p>
+          </Link>
+        </p>
+
+        <script is:inline>
+          (function () {
+            function applyVars() {
+              const body = document.body;
+              const from = body.dataset.bgFrom;
+              const to = body.dataset.bgTo;
+              const accent = body.dataset.accent;
+              if (from && to && accent) {
+                body.style.setProperty("--bg-from", from);
+                body.style.setProperty("--bg-to", to);
+                body.style.setProperty("--accent", accent);
+              }
+            }
+            function updateScrolled() {
+              const nav = document.getElementById("site-nav");
+              if (nav) nav.classList.toggle("is-scrolled", window.scrollY > 0);
+            }
+            applyVars();
+            updateScrolled();
+            window.addEventListener("scroll", updateScrolled, {
+              passive: true,
+            });
+            document.addEventListener("astro:after-swap", () => {
+              applyVars();
+              updateScrolled();
+            });
+          })();
+        </script>
       </section>
     </footer>
-    <script is:inline>
-      (function () {
-        function applyVars() {
-          const body = document.body;
-          const from = body.dataset.bgFrom;
-          const to = body.dataset.bgTo;
-          const accent = body.dataset.accent;
-          if (from && to && accent) {
-            body.style.setProperty("--bg-from", from);
-            body.style.setProperty("--bg-to", to);
-            body.style.setProperty("--accent", accent);
-          }
-        }
-        function updateScrolled() {
-          const nav = document.getElementById("site-nav");
-          if (nav) nav.classList.toggle("is-scrolled", window.scrollY > 0);
-        }
-        applyVars();
-        updateScrolled();
-        window.addEventListener("scroll", updateScrolled, { passive: true });
-        document.addEventListener("astro:after-swap", () => {
-          applyVars();
-          updateScrolled();
-        });
-      })();
-    </script>
   </body>
 </html>

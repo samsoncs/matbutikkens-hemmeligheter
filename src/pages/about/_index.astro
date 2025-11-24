@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import brobert from "../../assets/brobert.png";
+import Card from "../../lib/common/Card.astro";
+---
+
+<BaseLayout
+  title="Om oss – Matbutikkens Hemmeligheter (Barnepodkast 3–7 år)"
+  description="Lær mer om hvem som står bak Matbutikkens Hemmeligheter. Podcasten om matglede, vennskap og fantasi for barn mellom 3 og 7 år."
+  noMaxWidth
+>
+  <div class="max-w-5xl mx-auto px-4">
+    <section class="mb-12">
+      <Card
+        background="bg-emerald-50/50 bg-linear-to-t from-emerald-50/50 to-emerald-50/50"
+      >
+        <div class="grid md:grid-cols-2">
+          <section class="text-base/7">
+            <h1 class="text-4xl font-bold mb-4">
+              <span
+                class="bg-clip-text text-transparent bg-gradient-to-r from-rose-600 to-pink-600"
+                >Matbutikken
+              </span><span
+                class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600"
+                >blir til
+              </span>
+            </h1>
+            <p class="mb-4">
+              Som mange andre småbarnsforeldre hadde vi barn som ville spise alt
+              annet enn grønnsaker. I et forsøk på å gjøre middagen litt
+              morsommere laget vi en historie om brokkolien Brobert. Derfra
+              rullet det videre. Snart dukket purren Purnille opp, og før vi
+              visste ordet av det hadde vi skapt Matbutikkens Hemmeligheter. En
+              podcast full av fantasi, humor lyder og musikk. Et sted hvor barn
+              lærer om og sunn mat gjennom de spennende eventyrene til matvarene
+              i butikken.
+            </p>
+            <p class="mb-4">
+              I dag er vi en gjeng på fem som kanskje tok matbutikken litt for
+              alvorlig. Vi håper i hvert fall at barna lytter, ler. Og kanskje,
+              bare kanskje, stopper de litt ekstra opp ved grønnsaksdisken neste
+              gang de er i matbutikken.
+            </p>
+            <p class="font-bold">- Ninna, Samson, Patrick, Helle og Magnus</p>
+          </section>
+          <div class="flex justify-center md:justify-end">
+            <Image
+              class="rounded-lg mt-6 md:mt-0"
+              src={brobert}
+              width={300}
+              alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
+            />
+          </div>
+        </div>
+      </Card>
+    </section>
+  </div>
+</BaseLayout>

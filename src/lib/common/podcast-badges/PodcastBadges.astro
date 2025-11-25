@@ -1,9 +1,48 @@
 ---
 import AppleBadge from "./AppleBadge.astro";
 import SpotifyBadge from "./SpotifyBadge.astro";
+
+interface Props {
+  spotifyUrl?: string;
+  appleUrl?: string;
+}
+
+const { spotifyUrl, appleUrl } = Astro.props;
 ---
 
 <div class="flex gap-2 items-center mb-4 h-[40px]">
-  <AppleBadge />
-  <SpotifyBadge />
+  {
+    spotifyUrl && (
+      <a href={spotifyUrl}>
+        <SpotifyBadge />
+      </a>
+    )
+  }
+  {
+    !spotifyUrl && (
+      <span
+        class="opacity-50 select-none pointer-events-none"
+        aria-disabled="true"
+      >
+        <SpotifyBadge />
+      </span>
+    )
+  }
+  {
+    appleUrl && (
+      <a href={appleUrl}>
+        <AppleBadge />
+      </a>
+    )
+  }
+  {
+    !appleUrl && (
+      <span
+        class="opacity-50 select-none pointer-events-none"
+        aria-disabled="true"
+      >
+        <AppleBadge />
+      </span>
+    )
+  }
 </div>

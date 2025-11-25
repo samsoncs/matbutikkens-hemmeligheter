@@ -15,10 +15,12 @@ const season1: Season = [
     length: "08:16",
     cover: ep1,
     description:
-      "Brokkolien brobert er trist for ingen vil spise han. En dag dukker gutten Nils opp i matbutikken.",
+      "Brokkolien Brobert er trist for ingen vil spise han. En dag dukker gutten Nils opp i matbutikken.",
     fromColor: "oklch(98.2% 0.018 155.826)",
     toColor: "oklch(95% 0.052 163.051)",
     accentColor: "oklch(50.8% 0.118 165.612)",
+    spotifyUrl: "https://open.spotify.com/episode/1",
+    appleUrl: "https://podcasts.apple.com/episode/1",
   },
   {
     name: "Purren Purnille",
@@ -26,13 +28,15 @@ const season1: Season = [
     season: 1,
     number: 2,
     published: "2025-11-28",
-    length: "11:51",
+    length: "09:50",
     cover: ep2,
     description:
       "Purnille sin store drøm er å bli en snømann-nese, men er ikke det bare for gulrøtter?",
     fromColor: "oklch(95.1% 0.026 236.824)",
     toColor: "oklch(95.6% 0.045 203.388)",
     accentColor: "oklch(44.6% 0.043 257.281)",
+    spotifyUrl: "https://open.spotify.com/episode/1",
+    appleUrl: "https://podcasts.apple.com/episode/1",
   },
   {
     name: "Bananen Benny",

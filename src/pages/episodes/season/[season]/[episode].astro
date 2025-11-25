@@ -64,7 +64,10 @@ const { episode, prevEpisode, nextEpisode } = Astro.props;
         <EpisodeIdentifier episode={episode} />
         <EpisodeKeyStats episode={episode} />
       </div>
-      <PodcastBadges />
+      <PodcastBadges
+        spotifyUrl={episode.spotifyUrl}
+        appleUrl={episode.appleUrl}
+      />
     </div>
     <p>
       {episode.description}

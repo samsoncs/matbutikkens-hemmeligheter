@@ -10,6 +10,8 @@ export interface Episode {
   season: number;
   id: string;
   number: number;
+  spotifyUrl?: string;
+  appleUrl?: string;
 }
 
 export type Season = Episode[];

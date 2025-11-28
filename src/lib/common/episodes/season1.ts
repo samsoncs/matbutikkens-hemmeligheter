@@ -19,8 +19,7 @@ const season1: Season = [
     fromColor: "oklch(98.2% 0.018 155.826)",
     toColor: "oklch(95% 0.052 163.051)",
     accentColor: "oklch(50.8% 0.118 165.612)",
-    spotifyUrl:
-      "https://open.spotify.com/episode/2vpnvPTLbpHbUG3rxv8Mgn?si=km8AL6vOT0OWs7xfzks_Dg",
+    spotifyUrl: "https://open.spotify.com/episode/2vpnvPTLbpHbUG3rxv8Mgn",
     appleUrl:
       "https://podcasts.apple.com/us/podcast/brokkolien-brobert/id1856799991?i=1000738754076",
   },
@@ -37,8 +36,7 @@ const season1: Season = [
     fromColor: "oklch(95.1% 0.026 236.824)",
     toColor: "oklch(95.6% 0.045 203.388)",
     accentColor: "oklch(44.6% 0.043 257.281)",
-    spotifyUrl:
-      "https://open.spotify.com/episode/0YQk0HjXEIDyNNzk1iBhoE?si=dde69273d1f74f5d",
+    spotifyUrl: "https://open.spotify.com/episode/0YQk0HjXEIDyNNzk1iBhoE",
     appleUrl:
       "https://podcasts.apple.com/us/podcast/purren-purnille/id1856799991?i=1000738754175",
   },

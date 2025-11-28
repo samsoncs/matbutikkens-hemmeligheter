@@ -21,7 +21,8 @@ const season1: Season = [
     accentColor: "oklch(50.8% 0.118 165.612)",
     spotifyUrl:
       "https://open.spotify.com/episode/2vpnvPTLbpHbUG3rxv8Mgn?si=km8AL6vOT0OWs7xfzks_Dg",
-    appleUrl: undefined,
+    appleUrl:
+      "https://podcasts.apple.com/us/podcast/brokkolien-brobert/id1856799991?i=1000738754076",
   },
   {
     name: "Purren Purnille",
@@ -38,7 +39,8 @@ const season1: Season = [
     accentColor: "oklch(44.6% 0.043 257.281)",
     spotifyUrl:
       "https://open.spotify.com/episode/0YQk0HjXEIDyNNzk1iBhoE?si=dde69273d1f74f5d",
-    appleUrl: undefined,
+    appleUrl:
+      "https://podcasts.apple.com/us/podcast/purren-purnille/id1856799991?i=1000738754175",
   },
   {
     name: "Bananen Benny",

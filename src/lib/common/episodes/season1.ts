@@ -19,8 +19,9 @@ const season1: Season = [
     fromColor: "oklch(98.2% 0.018 155.826)",
     toColor: "oklch(95% 0.052 163.051)",
     accentColor: "oklch(50.8% 0.118 165.612)",
-    spotifyUrl: "https://open.spotify.com/episode/1",
-    appleUrl: "https://podcasts.apple.com/episode/1",
+    spotifyUrl:
+      "https://open.spotify.com/episode/2vpnvPTLbpHbUG3rxv8Mgn?si=km8AL6vOT0OWs7xfzks_Dg",
+    appleUrl: undefined,
   },
   {
     name: "Purren Purnille",
@@ -35,8 +36,9 @@ const season1: Season = [
     fromColor: "oklch(95.1% 0.026 236.824)",
     toColor: "oklch(95.6% 0.045 203.388)",
     accentColor: "oklch(44.6% 0.043 257.281)",
-    spotifyUrl: "https://open.spotify.com/episode/1",
-    appleUrl: "https://podcasts.apple.com/episode/1",
+    spotifyUrl:
+      "https://open.spotify.com/episode/0YQk0HjXEIDyNNzk1iBhoE?si=dde69273d1f74f5d",
+    appleUrl: undefined,
   },
   {
     name: "Bananen Benny",

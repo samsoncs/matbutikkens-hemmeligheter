@@ -7,14 +7,9 @@ import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
 
 const isCF = process.env.CF_PAGES === "1" || !!process.env.CF_PAGES_URL;
-const cfEnv = process.env.CF_PAGES_ENV;
 const siteName = "https://brobert.no";
 
-const site = !isCF
-  ? "http://localhost:4321"
-  : cfEnv === "production"
-    ? siteName
-    : process.env.CF_PAGES_URL || siteName;
+const site = !isCF ? "http://localhost:4321" : siteName;
 
 export default defineConfig({
   site,

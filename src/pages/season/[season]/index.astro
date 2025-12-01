@@ -1,12 +1,11 @@
 ---
-import BaseLayout from "../../../../layouts/BaseLayout.astro";
-import EpisodeCard from "../../../../lib/common/episodes/EpisodeCard.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import EpisodeCard from "@lib/common/episodes/EpisodeCard.astro";
 import {
   getAllSeasons,
   getSeasonEpisodes,
-} from "../../../../lib/common/episodes/episodes";
-import Link from "../../../../lib/common/Link.astro";
-
+} from "@lib/common/episodes/episodes";
+import Link from "@lib/common/Link.astro";
 export async function getStaticPaths() {
   const seasons = getAllSeasons();
 
@@ -40,7 +39,7 @@ const newestPublishedInSeason = [...episodes]
       {
         seasons.map((s) => (
           <Link
-            href={`episodes/season/${s}`}
+            href={`season/${s}`}
             class={`${s === currentSeason ? "bg-emerald-800 ring-3 ring-emerald-700 hover:bg-emerald-800 text-white" : "text-emerald-800"} font-semibold px-4 py-1 rounded-full hover:cursor-pointer transition active:translate-y-[1px] hover:shadow-lg hover:scale-[1.02]`}
           >
             {`Sesong ${s}`}

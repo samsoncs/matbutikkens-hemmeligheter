@@ -38,7 +38,7 @@ const { episode, prevEpisode, nextEpisode } = Astro.props;
     <div class="inline-block">
       <Link
         class="flex items-center gap-2 text-[var(--accent)] hover:underline font-bold mb-2"
-        href={`episodes/season/${episode.season}`}
+        href={`season/${episode.season}`}
       >
         <ChevronLeftIcon />
         Tilbake til sesong {episode.season}

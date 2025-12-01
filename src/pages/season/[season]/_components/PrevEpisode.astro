@@ -1,8 +1,8 @@
 ---
-import EpisodeIdentifier from "../../../../../lib/common/episodes/EpisodeIdentifier.astro";
-import type { Episode } from "../../../../../lib/common/episodes/types";
-import ChevronLeftIcon from "../../../../../lib/common/icons/ChevronLeftIcon.astro";
-import Link from "../../../../../lib/common/Link.astro";
+import EpisodeIdentifier from "@lib/common/episodes/EpisodeIdentifier.astro";
+import type { Episode } from "@lib/common/episodes/types";
+import ChevronLeftIcon from "@lib/common/icons/ChevronLeftIcon.astro";
+import Link from "@lib/common/Link.astro";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 const { episode } = Astro.props;
 ---
 
-<Link href={`episodes/season/${episode.season}/${episode.id}`}>
+<Link href={`season/${episode.season}/${episode.id}`}>
   <div
     style={{ background: episode.fromColor }}
     class="bg-gray-100 rounded-full overflow-hidden shadow-sm"

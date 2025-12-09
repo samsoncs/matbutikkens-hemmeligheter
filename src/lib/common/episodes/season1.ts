@@ -59,7 +59,7 @@ const season1: Season = [
     id: "bananen-benny",
     season: 1,
     number: 4,
-    published: "2025-12-26",
+    published: "2025-12-19",
     length: "11:49",
     cover: ep4,
     description:
@@ -73,7 +73,7 @@ const season1: Season = [
     id: "stjernekvelden",
     season: 1,
     number: 5,
-    published: "2026-01-09",
+    published: "2025-12-22",
     length: "11:11",
     cover: ep5,
     description:

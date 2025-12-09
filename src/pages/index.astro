@@ -18,7 +18,14 @@ const episodes = getAllEpisodes();
 const seasons = getAllSeasons();
 const lastSeason = Math.max(...seasons);
 
-const publishedEpisodes = episodes.filter((e) => isEpisodePublished(e));
+const publishedEpisodes = episodes
+  .filter((e) => isEpisodePublished(e))
+  .toSorted((a, b) => {
+    if (b.season !== a.season) {
+      return b.season - a.season;
+    }
+    return b.number - a.number;
+  });
 const upcomingEpisodes = episodes.filter((e) => !isEpisodePublished(e));
 const allEpisodes = [...publishedEpisodes, ...upcomingEpisodes];
 const previewEpisodes = allEpisodes.slice(0, 3);

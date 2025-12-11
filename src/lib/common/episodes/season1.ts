@@ -46,7 +46,7 @@ const season1: Season = [
     season: 1,
     number: 3,
     published: "2025-12-12",
-    length: "11:51",
+    length: "08:57",
     cover: ep3,
     description:
       "Eggene elsker å krangle, men når kokken kommer lærer de at de kanskje er best sammen.",
@@ -60,7 +60,7 @@ const season1: Season = [
     season: 1,
     number: 4,
     published: "2025-12-19",
-    length: "11:49",
+    length: "09:38",
     cover: ep4,
     description:
       "Benny er rampete, men en dag går det litt for langt når noen faller og slår seg.",
@@ -69,12 +69,12 @@ const season1: Season = [
     accentColor: "oklch(55.4% 0.135 66.442)",
   },
   {
-    name: "Stjernekvelden",
-    id: "stjernekvelden",
+    name: "Stjernekveld",
+    id: "stjernekveld",
     season: 1,
     number: 5,
     published: "2025-12-22",
-    length: "11:11",
+    length: "11:21",
     cover: ep5,
     description:
       "Brobert skal delta i talentkonkurranse, men blir nervøs når han hører Popcornelia sin vakre stemme.",

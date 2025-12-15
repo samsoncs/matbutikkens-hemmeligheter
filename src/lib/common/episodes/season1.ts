@@ -53,6 +53,9 @@ const season1: Season = [
     fromColor: "oklch(94.1% 0.03 12.58)",
     toColor: "oklch(94.8% 0.028 342.258)",
     accentColor: "oklch(58.6% 0.253 17.585)",
+    spotifyUrl: "https://open.spotify.com/episode/4oQ0XyGcQVtT5t5x7PjLZI",
+    appleUrl:
+      "https://podcasts.apple.com/us/podcast/egge-kj%C3%A6rlighet/id1856799991?i=1000740917888",
   },
   {
     name: "Bananen Benny",

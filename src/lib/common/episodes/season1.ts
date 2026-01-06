@@ -70,8 +70,7 @@ const season1: Season = [
     fromColor: "oklch(98% 0.016 73.684)",
     toColor: "oklch(98.7% 0.026 102.212)",
     accentColor: "oklch(55.4% 0.135 66.442)",
-    spotifyUrl:
-      "https://open.spotify.com/episode/6WS7d7kh8PfprJbPYuVIAq?si=3fae081d18a14003",
+    spotifyUrl: "https://open.spotify.com/episode/6WS7d7kh8PfprJbPYuVIAq",
     appleUrl:
       "https://podcasts.apple.com/us/podcast/bananen-benny/id1856799991?i=1000741918432",
   },
@@ -88,6 +87,9 @@ const season1: Season = [
     fromColor: "oklch(87% 0.065 274.039)",
     toColor: "oklch(81.1% 0.111 293.571)",
     accentColor: "oklch(43.2% 0.232 292.759)",
+    spotifyUrl: "https://open.spotify.com/episode/3bxq4M365X79uNk9HRzL0i",
+    appleUrl:
+      "https://podcasts.apple.com/us/podcast/stjernekveld/id1856799991?i=1000742243495",
   },
 ];
 

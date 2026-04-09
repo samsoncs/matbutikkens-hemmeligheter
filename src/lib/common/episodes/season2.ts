@@ -1,8 +1,5 @@
-import ep1 from "../../../assets/episodes/season-1/ep1.png";
-import ep2 from "../../../assets/episodes/season-1/ep2.png";
-import ep3 from "../../../assets/episodes/season-1/ep3.png";
-import ep4 from "../../../assets/episodes/season-1/ep4.png";
-import ep5 from "../../../assets/episodes/season-1/ep5.png";
+import ep1 from "../../../assets/episodes/season-2/ep1.png";
+import ep2 from "../../../assets/episodes/season-2/ep2.png";
 import type { Season } from "./types";
 
 const season2: Season = [

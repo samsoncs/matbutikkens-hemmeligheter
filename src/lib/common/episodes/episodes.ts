@@ -1,8 +1,9 @@
 import { differenceInCalendarDays, format, isAfter } from "date-fns";
 import type { Episode, Season } from "./types";
 import season1 from "./season1";
+import season2 from "./season2";
 
-const allEpisodes = [...season1].sort(
+const allEpisodes = [...season1, ...season2].sort(
   (a, b) => a.season - b.season || a.number - b.number,
 );
 

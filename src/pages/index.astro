@@ -31,6 +31,7 @@ const allEpisodes = [...publishedEpisodes, ...upcomingEpisodes];
 const previewEpisodes = allEpisodes.slice(0, 3);
 const firstTwoEpisodes = previewEpisodes.slice(0, 2);
 const thirdEpisode = previewEpisodes[2];
+const newestPublished = publishedEpisodes[0];
 ---
 
 <BaseLayout
@@ -122,7 +123,10 @@ const thirdEpisode = previewEpisodes[2];
         <div class="grid gap-8 auto-rows-max content-start">
           {
             firstTwoEpisodes.map((episode, i) => (
-              <EpisodeCard isCurrent={false} episode={episode} />
+              <EpisodeCard
+                isCurrent={episode.id === newestPublished?.id}
+                episode={episode}
+              />
             ))
           }
         </div>

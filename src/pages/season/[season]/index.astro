@@ -21,6 +21,8 @@ export async function getStaticPaths() {
 const { currentSeason, seasons, episodes } = Astro.props;
 
 const now = new Date();
+const latestSeason = Math.max(...seasons);
+const isLatestSeason = currentSeason === latestSeason;
 const newestPublishedInSeason = [...episodes]
   .reverse()
   .find((e) => new Date(e.published) <= now);
@@ -52,7 +54,7 @@ const newestPublishedInSeason = [...episodes]
       {
         episodes.map((episode) => (
           <EpisodeCard
-            isCurrent={newestPublishedInSeason?.id === episode.id}
+            isCurrent={isLatestSeason && newestPublishedInSeason?.id === episode.id}
             episode={episode}
           />
         ))

@@ -4,6 +4,7 @@ import EpisodeCard from "@lib/common/episodes/EpisodeCard.astro";
 import {
   getAllSeasons,
   getSeasonEpisodes,
+  isEpisodeNew,
 } from "@lib/common/episodes/episodes";
 import Link from "@lib/common/Link.astro";
 export async function getStaticPaths() {
@@ -54,7 +55,11 @@ const newestPublishedInSeason = [...episodes]
       {
         episodes.map((episode) => (
           <EpisodeCard
-            isCurrent={isLatestSeason && newestPublishedInSeason?.id === episode.id}
+            isCurrent={
+              isLatestSeason &&
+              newestPublishedInSeason?.id === episode.id &&
+              isEpisodeNew(episode)
+            }
             episode={episode}
           />
         ))

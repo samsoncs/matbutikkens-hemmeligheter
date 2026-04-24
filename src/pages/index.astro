@@ -9,6 +9,7 @@ import Card from "../lib/common/Card.astro";
 import {
   getAllEpisodes,
   isEpisodePublished,
+  isEpisodeNew,
   getAllSeasons,
 } from "../lib/common/episodes/episodes";
 import PodcastBadges from "@lib/common/podcast-badges/PodcastBadges.astro";
@@ -83,28 +84,28 @@ const newestPublished = publishedEpisodes[0];
           </div>
         </div>
         <div
-          class="hidden md:block pointer-events-none select-none absolute md:right-[-4%] sm:right-[-14%] right-[-34%] bottom-[-16%] rotate-6 md:rotate-3 origin-center"
+          class="hidden md:block pointer-events-none select-none absolute md:right-[-20%] sm:right-[-14%] right-[-34%] bottom-[-16%] rotate-6 md:-rotate-20 origin-center"
         >
           <Image
             class="rounded-lg hidden md:block z-1"
             src={purnille}
-            width={370}
+            width={600}
             alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
           />
         </div>
         <div
-          class="pointer-events-none select-none absolute lg:right-[20%] md:right-[25%] right-[-10%] bottom-[-15%] md:bottom-[-16%] rotate-6 md:rotate-3 origin-center"
+          class="pointer-events-none select-none absolute lg:right-[15%] md:right-[25%] right-[-15%] bottom-[-10%] sm:bottom-[-22%] md:bottom-[-20%] -rotate-15 -md:rotate-10 origin-center"
         >
           <Image
-            class="rounded-lg hidden md:block z-1"
+            class="rounded-lg hidden sm:block z-1"
             src={brobert}
-            width={300}
+            width={400}
             alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
           />
           <Image
-            class="rounded-lg md:hidden block z-1"
+            class="rounded-lg sm:hidden block z-1"
             src={brobert}
-            width={200}
+            width={250}
             alt="Illustrasjon for podkasten Matbutikkens Hemmeligheter"
           />
         </div>
@@ -124,7 +125,9 @@ const newestPublished = publishedEpisodes[0];
           {
             firstTwoEpisodes.map((episode, i) => (
               <EpisodeCard
-                isCurrent={episode.id === newestPublished?.id}
+                isCurrent={
+                  episode.id === newestPublished?.id && isEpisodeNew(episode)
+                }
                 episode={episode}
               />
             ))

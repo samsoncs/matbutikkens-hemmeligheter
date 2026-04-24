@@ -11,10 +11,9 @@ interface Props {
   episode: Episode;
   isCurrent?: boolean;
   rounded?: boolean;
-  size?: { width: number; height: number };
 }
 
-const { episode, isCurrent, size, rounded = true } = Astro.props;
+const { episode, isCurrent, rounded = true } = Astro.props;
 
 const isUpcoming = !isEpisodePublished(episode);
 let upcomingLabel = getUpcomingLabel(episode);
@@ -31,8 +30,8 @@ const accentColor = getAccentColor(episode);
       isUpcoming ? "opacity-60" : ""
     }`}
     src={episode.cover}
-    width={size?.width || 300}
-    height={size?.height || 300}
+    widths={[400, 800, 1200]}
+    sizes="(min-width: 768px) 800px, 100vw"
     alt={`Illustrasjon for episoden ${episode.name}`}
   />
   {

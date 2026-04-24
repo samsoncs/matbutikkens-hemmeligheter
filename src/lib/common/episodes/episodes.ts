@@ -38,6 +38,17 @@ export function isEpisodePublished(episode: Episode): boolean {
   return !isAfter(new Date(episode.published), new Date());
 }
 
+const NEW_EPISODE_WINDOW_DAYS = 14;
+
+export function isEpisodeNew(episode: Episode): boolean {
+  if (!isEpisodePublished(episode)) return false;
+  const daysSincePublish = differenceInCalendarDays(
+    new Date(),
+    parseLocalDate(episode.published),
+  );
+  return daysSincePublish >= 0 && daysSincePublish < NEW_EPISODE_WINDOW_DAYS;
+}
+
 function parseLocalDate(isoDate: string): Date {
   return new Date(`${isoDate}T00:00:00`);
 }

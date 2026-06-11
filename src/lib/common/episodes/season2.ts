@@ -139,8 +139,8 @@ const season2: Season = [
     id: "blodappelsinen-appelone",
     season: 2,
     number: 8,
-    published: "2026-06-19",
-    length: "08:59",
+    published: "2026-07-03",
+    length: "11:28",
     cover: ep8,
     description:
       "Alt blodappelsinen Appelone vil er å bli en gresskarlykt, denne halloween går drømmen i oppfyllelse.",

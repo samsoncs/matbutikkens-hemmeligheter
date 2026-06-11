@@ -1,6 +1,12 @@
 import ep1 from "../../../assets/episodes/season-2/ep1.png";
 import ep2 from "../../../assets/episodes/season-2/ep2.png";
 import ep3 from "../../../assets/episodes/season-2/ep3.png";
+import ep4 from "../../../assets/episodes/season-2/ep4.png";
+import ep5 from "../../../assets/episodes/season-2/ep5.png";
+import ep6 from "../../../assets/episodes/season-2/ep6.png";
+import ep7 from "../../../assets/episodes/season-2/ep7.png";
+import ep8 from "../../../assets/episodes/season-2/ep8.png";
+
 import type { Season } from "./types";
 
 const season2: Season = [
@@ -57,6 +63,60 @@ const season2: Season = [
       "https://open.spotify.com/episode/0OVGBQ5Ud0PU6iD0ydVYaR?si=KWUJdznPRAKy4tY1S8mjNw",
     appleUrl:
       "https://podcasts.apple.com/us/podcast/kokkekrise-s2-episode-3/id1856799991?i=1000763337381",
+  },
+  {
+    name: "Bursdagsfrosken",
+    id: "bursdagsfrosken",
+    season: 2,
+    number: 4,
+    published: "2026-05-07",
+    length: "09:00",
+    cover: ep4,
+    description:
+      "Når Jens enda ikke har fått kake på bursdagen, lager matvarene i butikken en hemmelig plan.",
+    fromColor: "oklch(95.4% 0.038 75.164)",
+    toColor: "oklch(97.3% 0.071 103.193)",
+    accentColor: "oklch(68.1% 0.162 75.834)",
+    spotifyUrl:
+      "https://open.spotify.com/episode/6cf2abHB6sCYZkC9JbO0ia?si=d175080abefd404f",
+    appleUrl:
+      "https://podcasts.apple.com/us/podcast/bursdagsfrosken-s2-episode-4/id1856799991?i=1000766707360",
+  },
+  {
+    name: "Paprikapakten",
+    id: "paprikapakten",
+    season: 2,
+    number: 5,
+    published: "2026-05-22",
+    length: "10:38",
+    cover: ep5,
+    description:
+      "Tre paprika-venner havner i trøbbel. Det blir opp til forsiktige Grønn å redde dagen.",
+    fromColor: "oklch(95.4% 0.038 75.164)",
+    toColor: "oklch(97.3% 0.071 103.193)",
+    accentColor: "oklch(68.1% 0.162 75.834)",
+    spotifyUrl:
+      "https://open.spotify.com/episode/2YEsVudi5MClVXIYvonAKJ?si=6ab92ca0bba44a13",
+    appleUrl:
+      "https://podcasts.apple.com/us/podcast/paprikapakten-s2-episode-5/id1856799991?i=1000769069523",
+  },
+  {
+    name: "Turdag",
+    id: "turdag",
+    season: 2,
+    number: 6,
+    published: "2026-06-05",
+    length: "08:25",
+    cover: ep6,
+    description:
+      "Førsteklasse skal på tur, og det er stor spenning om hvilke matvarer som får være med.",
+    fromColor: "oklch(95.4% 0.038 75.164)",
+    toColor: "oklch(97.3% 0.071 103.193)",
+    accentColor: "oklch(68.1% 0.162 75.834)",
+    spotifyUrl:
+      "https://open.spotify.com/episode/3PPDgA6Hh9aJau1SoHaezF?si=bafc92430cea4841",
+    appleUrl:
+      "https://podcasts.apple.com/us/podcast/turdag-s2-episode-6/id1856799991?i=1000771264314",
   },
 ];
 

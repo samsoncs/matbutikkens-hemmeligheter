@@ -74,9 +74,9 @@ const season2: Season = [
     cover: ep4,
     description:
       "Når Jens enda ikke har fått kake på bursdagen, lager matvarene i butikken en hemmelig plan.",
-    fromColor: "oklch(95.4% 0.038 75.164)",
-    toColor: "oklch(97.3% 0.071 103.193)",
-    accentColor: "oklch(68.1% 0.162 75.834)",
+    fromColor: "oklch(92.5% 0.084 155.995)",
+    toColor: "oklch(91% 0.096 180.426)",
+    accentColor: "oklch(43.2% 0.095 166.913)",
     spotifyUrl:
       "https://open.spotify.com/episode/6cf2abHB6sCYZkC9JbO0ia?si=d175080abefd404f",
     appleUrl:
@@ -92,9 +92,9 @@ const season2: Season = [
     cover: ep5,
     description:
       "Tre paprika-venner havner i trøbbel. Det blir opp til forsiktige Grønn å redde dagen.",
-    fromColor: "oklch(95.4% 0.038 75.164)",
-    toColor: "oklch(97.3% 0.071 103.193)",
-    accentColor: "oklch(68.1% 0.162 75.834)",
+    fromColor: "oklch(89.4% 0.057 293.283)",
+    toColor: "oklch(90.2% 0.063 306.703)",
+    accentColor: "oklch(43.2% 0.232 292.759)",
     spotifyUrl:
       "https://open.spotify.com/episode/2YEsVudi5MClVXIYvonAKJ?si=6ab92ca0bba44a13",
     appleUrl:
@@ -110,13 +110,45 @@ const season2: Season = [
     cover: ep6,
     description:
       "Førsteklasse skal på tur, og det er stor spenning om hvilke matvarer som får være med.",
-    fromColor: "oklch(95.4% 0.038 75.164)",
-    toColor: "oklch(97.3% 0.071 103.193)",
-    accentColor: "oklch(68.1% 0.162 75.834)",
+    fromColor: "oklch(96.7% 0.067 122.328)",
+    toColor: "oklch(96.2% 0.044 156.743)",
+    accentColor: "oklch(44.8% 0.119 151.328)",
     spotifyUrl:
       "https://open.spotify.com/episode/3PPDgA6Hh9aJau1SoHaezF?si=bafc92430cea4841",
     appleUrl:
       "https://podcasts.apple.com/us/podcast/turdag-s2-episode-6/id1856799991?i=1000771264314",
+  },
+  {
+    name: "Badedagen",
+    id: "badedagen",
+    season: 2,
+    number: 7,
+    published: "2026-06-19",
+    length: "08:59",
+    cover: ep7,
+    description:
+      "Matbutikken er gjort om til badeland. Alle matvarene koser seg, unntatt brødskiven Brørjan, han har vannskrekk.",
+    fromColor: "oklch(95.6% 0.045 203.388)",
+    toColor: "oklch(95.1% 0.026 236.824)",
+    accentColor: "oklch(52% 0.105 223.128)",
+    spotifyUrl: "",
+    appleUrl: "",
+  },
+  {
+    name: "Blodappelsinen Appelone",
+    id: "blodappelsinen-appelone",
+    season: 2,
+    number: 8,
+    published: "2026-06-19",
+    length: "08:59",
+    cover: ep8,
+    description:
+      "Alt blodappelsinen Appelone vil er å bli en gresskarlykt, denne halloween går drømmen i oppfyllelse.",
+    fromColor: "oklch(80.8% 0.114 19.571)",
+    toColor: "oklch(83.7% 0.128 66.29)",
+    accentColor: "oklch(44.4% 0.177 26.899)",
+    spotifyUrl: "",
+    appleUrl: "",
   },
 ];
 
